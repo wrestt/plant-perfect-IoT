@@ -12,24 +12,30 @@ conn = psycopg2.connect(database="plantdata", user=USERNAME, password=PASSWORD, 
 cur = conn.cursor();
 print "Opened database successfully"
 
+def createWaterRecords(data):
+    cur.execute("INSERT INTO water (idpi, present, watering) VALUES ('%s', '%s', '%s')" % \
+        (piId, data[0], data[1])
+    )
+    conn.commit();
+    print "Water records created successfully"
 def createLightRecords(data):
     cur.execute("INSERT INTO light (idpi, ir, lux, visible) VALUES ('%s', '%s', '%s', '%s')" % \
-        (piId, data[1], data[3], data[2])
+        (piId, data[2], data[3], data[4])
     )
     conn.commit();
     print "Light records created successfully"
-def createAirRecords(data):
-    cur.execute("INSERT INTO air(idpi, airtemp, airhumidity) VALUES ('%s', '%s', '%s')" % \
-        (piId, data[4], data[5])
-    )
-    conn.commit();
-    print "Air records created successfully"
 def createSoilRecords(data):
     cur.execute("INSERT INTO soil(idpi, soilhumidity) VALUES ('%s', '%s')" %\
-        (piId, data[4])
+        (piId, data[5])
     )
     conn.commit();
     print "Soil records created successfully"
+def createAirRecords(data):
+    cur.execute("INSERT INTO air(idpi, airtemp, airhumidity) VALUES ('%s', '%s', '%s')" % \
+        (piId, data[6], data[7])
+    )
+    conn.commit();
+    print "Air records created successfully"
 
 while True:
     serial_line = ser.readline()
@@ -38,19 +44,14 @@ while True:
     else:
         piId = 'WaterIoT'
         data = serial_line.rstrip('\n').split(',')
-        fillButton = data[0]
-        irNow = data[1]
-        visibleNow = data[2]
-        luxNow = data[3]
-        soilhumidityNow = data[4]
         if data.__len__() > 5:
-            airtempNow = data[5]
-            airhumidityNow = data[6]
+            createWaterRecords(data)
             createLightRecords(data)
             createSoilRecords(data)
             createAirRecords(data)
             break
         else:
+            createWaterRecords(data)
             createLightRecords(data)
             createSoilRecords(data)
         print data

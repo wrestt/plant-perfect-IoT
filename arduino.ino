@@ -23,7 +23,9 @@ int buttonPin = 8;
 int pumpPin = 11;
 int count = 0;
 int soilHumidity;
-int waterButton;
+int button;
+int buttonCount;
+int waterPresent = true;
 int screenCount;
 float fahrenheit;
 float humidity;
@@ -56,6 +58,15 @@ void basicLcdPrint(void) {
   lcd.print(String(soilHumidity) + "%");
 }
 
+void backlightLcd(void) {
+  if(screenCount > 0) {
+    lcd.backlight();
+    screenCount --;
+  } else {
+    lcd.noBacklight();
+  }
+}
+
 void wateringLcdPrint(void) {
   lcd.clear();
   lcd.setCursor(6,1);
@@ -79,7 +90,7 @@ void setup(void) {
 
 void basicRead(void) {
   basicLcdPrint();
-  Serial.println(String(waterButton) + ',' + String(irLight) + ',' + String(visibleLight) + ',' + String(luxLight) + ',' + String(soilHumidity) + '\n');
+  Serial.println(String(button) + ',' + String(waterPresent) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + '\n');
 }
 
 void advancedRead(void) {
@@ -90,44 +101,44 @@ void advancedRead(void) {
     return;
   } else  {
     basicLcdPrint();
-    Serial.print(String(waterButton) + ',' + String(irLight) + ',' + String(visibleLight) + ',' + String(luxLight) + ',' + String(soilHumidity) + ',' + String(fahrenheit) + ',' + String(humidity) + '\n');
+    Serial.print(String(button) + ','+ String(waterPresent) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + ',' + String(fahrenheit) + ',' + String(humidity) + '\n');
   }
 }
 
 void loop(void) {
   soilHumidity = word(analogRead(A0));
-  waterButton = digitalRead(buttonPin);
-  Serial.print(String(waterButton));
+  button = digitalRead(buttonPin);
   lum = tsl.getFullLuminosity();
   irLight = lum >> 16;
   fullLight = lum & 0xFFFF;
   visibleLight = fullLight - irLight;
   luxLight = tsl.calculateLux(fullLight, irLight);
-  if (waterButton == 1) {
-    if(soilHumidity > 0) {
-      digitalWrite(pumpPin, HIGH);
-      wateringLcdPrint();
-    } else {
-      digitalWrite(pumpPin, LOW);
-      lowWaterLcdPrint();
-    }
-    lcd.backlight();
-    screenCount = 20;
-  } else {
-    digitalWrite(pumpPin, LOW);
-    if(screenCount > 0) {
+  backlightLcd();
+  if (button == 1) buttonCount++;
+  switch (buttonCount) {
+    case 1:
       lcd.backlight();
-      screenCount -= 1;
-    } else {
-      lcd.noBacklight();
+      screenCount = 20;
+      break;
+    case 3:
+      if(soilHumidity > 0) {
+        digitalWrite(pumpPin, HIGH);
+        wateringLcdPrint();
+      } else {
+        digitalWrite(pumpPin, LOW);
+        lowWaterLcdPrint();
+      }
+      break;
+    default:
+      digitalWrite(pumpPin, LOW);
+      if (count < 10) {
+        basicRead();
+        count ++;
+      } else {
+        count = 0;
+        advancedRead();
+      }
+      break;
     }
-    if (count < 10) {
-      basicRead();
-      count += 1;
-    } else {
-      count = 0;
-      advancedRead();
-    }
-  }
   delay(50);
 }
