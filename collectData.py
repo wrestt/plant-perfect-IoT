@@ -12,19 +12,24 @@ conn = psycopg2.connect(database="plantdata", user=USERNAME, password=PASSWORD, 
 cur = conn.cursor();
 print "Opened database successfully"
 
-def createRecords(data):
-    print piId;
+def createLightRecords(data):
     cur.execute("INSERT INTO light (idpi, ir, lux, visible) VALUES ('%s', '%s', '%s', '%s')" % \
         (piId, data[1], data[3], data[2])
     )
+    conn.commit();
+    print "Light records created successfully"
+def createAirRecords(data):
     cur.execute("INSERT INTO air(idpi, airtemp, airhumidity) VALUES ('%s', '%s', '%s')" % \
-        (piId, data[5], data[4])
-    )
-    cur.execute("INSERT INTO soil(idpi, soilhumidity) VALUES ('%s', '%s')" %\
-        (piId, data[6])
+        (piId, data[4], data[5])
     )
     conn.commit();
-    print "Records created successfully"
+    print "Air records created successfully"
+def createSoilRecords(data):
+    cur.execute("INSERT INTO soil(idpi, soilhumidity) VALUES ('%s', '%s')" %\
+        (piId, data[4])
+    )
+    conn.commit();
+    print "Soil records created successfully"
 
 while True:
     serial_line = ser.readline()
@@ -33,16 +38,21 @@ while True:
     else:
         piId = 'WaterIoT'
         data = serial_line.rstrip('\n').split(',')
+        fillButton = data[0]
+        irNow = data[1]
+        visibleNow = data[2]
+        luxNow = data[3]
+        soilhumidityNow = data[4]
         if data.__len__() > 5:
-            fillButton = data[0]
-            irNow = data[1]
-            visibleNow = data[2]
-            luxNow = data[3]
-            airhumidityNow = data[4]
             airtempNow = data[5]
-            soilhumidityNow = data[6]
-            createRecords(data)
+            airhumidityNow = data[6]
+            createLightRecords(data)
+            createSoilRecords(data)
+            createAirRecords(data)
             break
+        else:
+            createLightRecords(data)
+            createSoilRecords(data)
         print data
 
 cur.execute("SELECT id, my_date, idpi, ir, lux, visible FROM light")
