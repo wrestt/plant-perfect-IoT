@@ -12,6 +12,39 @@ conn = psycopg2.connect(database="plantdata", user=USERNAME, password=PASSWORD, 
 cur = conn.cursor();
 print "Opened database successfully"
 
+def createRecords(data):
+    print piId;
+    cur.execute("INSERT INTO light (idpi, ir, lux, visible) VALUES ('%s', '%s', '%s', '%s')" % \
+        (piId, data[1], data[3], data[2])
+    )
+    cur.execute("INSERT INTO air(idpi, airtemp, airhumidity) VALUES ('%s', '%s', '%s')" % \
+        (piId, data[5], data[4])
+    )
+    cur.execute("INSERT INTO soil(idpi, soilhumidity) VALUES ('%s', '%s')" %\
+        (piId, data[6])
+    )
+    conn.commit();
+    print "Records created successfully"
+
+while True:
+    serial_line = ser.readline()
+    if serial_line.find(',') == -1:
+        print serial_line
+    else:
+        piId = 'WaterIoT'
+        data = serial_line.rstrip('\n').split(',')
+        if data.__len__() > 5:
+            fillButton = data[0]
+            irNow = data[1]
+            visibleNow = data[2]
+            luxNow = data[3]
+            airhumidityNow = data[4]
+            airtempNow = data[5]
+            soilhumidityNow = data[6]
+            createRecords(data)
+            break
+        print data
+
 cur.execute("SELECT id, my_date, idpi, ir, lux, visible FROM light")
 rows = cur.fetchall()
 for row in rows:
