@@ -55,6 +55,23 @@ for row in rows:
    print "lux = ", row[4]
    print "visible = ", row[5], "\n"
 
+cur.execute("SELECT id, my_date, idpi, soilhumidity FROM soil")
+rows = cur.fetchall()
+for row in rows:
+   print "ID = ", row[0]
+   print "date = ", row[1]
+   print "idpi = ", row[2]
+   print "soil = ", row[3], "\n"
+
+cur.execute("SELECT id, my_date, idpi, airtemp, airhumidity FROM air")
+rows = cur.fetchall()
+for row in rows:
+    print "ID = ", row[0]
+    print "date = ", row[1]
+    print "idpi = ",
+    print "temp = ", row[3]
+    print "humidity = ", row[4], "\n"
+
 print "Operation done successfully"
 ser.close();
 conn.close();
