@@ -78,6 +78,7 @@ void setup(void) {
 }
 
 void basicRead(void) {
+  basicLcdPrint();
   Serial.println(String(waterButton) + ',' + String(irLight) + ',' + String(visibleLight) + ',' + String(luxLight) + ',' + String(soilHumidity) + '\n');
 }
 
