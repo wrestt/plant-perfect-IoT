@@ -4,7 +4,6 @@ var methodOverride = require('method-override');
 var session = require('cookie-session');
 var _ = require('lodash');
 
-apiRouter = express.Router();
 app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));

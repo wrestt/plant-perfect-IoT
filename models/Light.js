@@ -1,4 +1,4 @@
-var bookshelf = require('./../config/db').bookshelf;
+var bookshelf = require('./../config/bookshelf').bookshelf;
 
 var Light = bookshelf.Model.extend({
   tableName: 'light',

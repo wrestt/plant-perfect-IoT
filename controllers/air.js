@@ -2,7 +2,7 @@ var Model = require('./../models/Air');
 
 app.get('/airs/:id', function(req, res) {
   var piId = req.params.id;
-  new Model.Air().where('idpi', piId).fetch()
+  new Model.Air().where('idpi', piId).fetchAll()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
