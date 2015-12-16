@@ -1,6 +1,6 @@
 var Model = require('./../models/Water');
 
-var getWAter = function(req, res) {
+var getWater = function(req, res) {
   var piId = req.params.id;
   new Model.Water().where('idpi', piId).fetch()
     .then(function(pi) {
