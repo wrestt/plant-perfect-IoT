@@ -1,4 +1,4 @@
-var config = require('./env.json')[process.env.NODE_ENV || 'production'];
+var config = require('./../env.json')[process.env.NODE_ENV || 'production'];
 var dbUsername = config.PLANTDATA_USERNAME;
 var dbPassword = config.PLANTDATA_PASSWORD;
 var knex = require('knex')({

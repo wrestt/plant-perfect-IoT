@@ -1,8 +1,6 @@
 (function() {
   angular
-    .module('plantApp', [
-      'ngRoute'
-    ])
+    .module('plantApp', ['ngRoute', 'ngResource'])
     .config(['$resourceProvider', '$routeProvider', '$locationProvider',
       function($resourceProvider, $routeProvider, $locationProvider) {
         $routeProvider
