@@ -33,6 +33,6 @@ CREATE TABLE water (
   id SERIAL PRIMARY KEY,
   my_date TIMESTAMP default current_timestamp,
   idpi TEXT,
-  present BOOLEAN,
-  watering BOOLEAN
+  present NUMERIC,
+  watering NUMERIC
 );

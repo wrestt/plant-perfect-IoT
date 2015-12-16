@@ -13,7 +13,7 @@ cur = conn.cursor();
 print "Opened database successfully"
 
 def createWaterRecords(data):
-    cur.execute("INSERT INTO water (idpi, present, watering) VALUES ('%s', '%s', '%s')" % \
+    cur.execute("INSERT INTO water (idpi, watering, present ) VALUES ('%s', '%s', '%s')" % \
         (piId, data[0], data[1])
     )
     conn.commit();
@@ -44,7 +44,7 @@ while True:
     else:
         piId = 'WaterIoT'
         data = serial_line.rstrip('\n').split(',')
-        if data.__len__() > 5:
+        if data.__len__() > 6:
             createWaterRecords(data)
             createLightRecords(data)
             createSoilRecords(data)
@@ -55,6 +55,15 @@ while True:
             createLightRecords(data)
             createSoilRecords(data)
         print data
+
+cur.execute("SELECT id, my_date, idpi, watering, present FROM water")
+rows = cur.fetchall()
+for row in rows:
+    print "ID = ", row[0]
+    print "date = ", row[1]
+    print "idpi = ", row[2]
+    print "watering = ", row[3]
+    print "present = ", row[4]
 
 cur.execute("SELECT id, my_date, idpi, ir, lux, visible FROM light")
 rows = cur.fetchall()
