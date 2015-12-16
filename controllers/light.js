@@ -1,25 +1,20 @@
 var Model = require('./../models/Light');
 
-var getLight = function(req, res) {
+app.get('/lights/:id', function(req, res) {
   var piId = req.params.id;
-  new Model.Light().where('idpi', piId).fetch()
+  new Model.Light().where('idpi', piId).fetchAll()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
       res.json(error);
     });
-};
+});
 
-var getAllLights = function(req, res) {
+app.get('/lights', function(req, res) {
   new Model.Light().fetchAll()
     .then(function(pis) {
       res.json(pis);
     }).catch(function(error) {
       res.json(error);
     });
-};
-
-module.exports = {
-  getLight: getLight,
-  getAllLights: getAllLights
-};
+});
