@@ -42,8 +42,36 @@ var Schema = {
       nullable: false,
       unsigned: true
     }
+  },
+
+  air: {
+    id: {
+      type: 'increments',
+      nullable: false,
+      primary: true
+    },
+    date: {
+      type: 'dateTime',
+      defualt: current_timestamp
+    },
+    idpi: {
+      type: 'text',
+      maxlength: 50,
+      nullable: false
+    },
+    airtemp: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    },
+    air: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    }
   }
 
 };
+
 
 module.exports = Schema;
