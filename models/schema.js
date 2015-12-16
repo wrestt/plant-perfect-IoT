@@ -1,5 +1,5 @@
 var Schema = {
-  Pis: {
+  pis: {
     id: {
       type: 'increments',
       nullable: false,
@@ -9,6 +9,38 @@ var Schema = {
       type: 'text',
       maxlength: 50,
       nullable: false
+    }
+  },
+
+  lights: {
+    id: {
+      type: 'increments',
+      nullable: false,
+      primary: true
+    },
+    date: {
+      type: 'dateTime',
+      defualt: current_timestamp
+    },
+    idpi: {
+      type: 'text',
+      maxlength: 50,
+      nullable: false
+    },
+    ir: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    },
+    lux: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    },
+    visible: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
     }
   }
 
