@@ -2,13 +2,11 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('soil', function(table) {
     table.increments('id').primary();
-    table.string('idpi')
-      .unique()
-      .notNullable();
+    table.string('idpi');
 
     table.decimal(('humidity'), [8], [2]);
 
-    table.timestamp('create_at').defaultTo(knex.fn.now());
+    table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
 
