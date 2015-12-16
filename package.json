@@ -1,0 +1,19 @@
+{
+  "name": "plant-perfect-iot",
+  "version": "1.0.0",
+  "description": "Internet of Things automation for watering plants.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wrestt/plant-perfect-IoT.git"
+  },
+  "author": "Teagan Wrest",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wrestt/plant-perfect-IoT/issues"
+  },
+  "homepage": "https://github.com/wrestt/plant-perfect-IoT#readme"
+}
