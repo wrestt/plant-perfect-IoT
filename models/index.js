@@ -1,1 +1,1 @@
-var bookshelf = require()
+var bookshelf = require();
