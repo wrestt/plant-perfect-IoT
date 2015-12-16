@@ -1,6 +1,6 @@
 var Schema = {
 
-  pis: {
+  pi: {
     id: {
       type: 'increments',
       nullable: false,
@@ -13,7 +13,7 @@ var Schema = {
     }
   },
 
-  lights: {
+  light: {
     id: {
       type: 'increments',
       nullable: false,
