@@ -13,13 +13,13 @@ cur = conn.cursor();
 
 print "Opened database successfully"
 
-# def createPiRecords(piId):
-#     if cur.execute("SELECT idpi FROM pi WHERE idpi = ('%s')" %(piId)) == 0:
-#         cur.execute("INSERT INTO pi (idpi) VALUES ('%s')" % \
-#             (piId)
-#         )
-#         conn.commit();
-#     print "Pi records created successfully"
+def createPiRecords(piId):
+    try:
+        cur.execute("INSERT INTO pi (idpi) VALUES ('%s')" % (piId))
+        print "Pi records created successfully"
+    except:
+        print "Pi Record already exists"
+    conn.commit();
 
 def createWaterRecords(piId, data):
     cur.execute("INSERT INTO water (idpi, watering, available ) VALUES ('%s', '%s', '%s')" % \
@@ -56,7 +56,7 @@ while True:
     else:
         piId = 'WaterIoT'
         data = serial_line.rstrip('\n').split(',')
-        # createPiRecords(piId);
+        createPiRecords(piId);
         if data.__len__() > 6:
             createWaterRecords(piId, data)
             createLightRecords(piId, data)
