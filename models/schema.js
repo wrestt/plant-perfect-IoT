@@ -69,6 +69,28 @@ var Schema = {
       nullable: false,
       unsigned: true
     }
+  },
+
+  soil: {
+    id: {
+      type: 'increments',
+      nullable: false,
+      primary: true
+    },
+    date: {
+      type: 'dateTime',
+      defualt: current_timestamp
+    },
+    idpi: {
+      type: 'text',
+      maxlength: 50,
+      nullable: false
+    },
+    soilhumidity: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    }
   }
 
 };
