@@ -91,6 +91,33 @@ var Schema = {
       nullable: false,
       unsigned: true
     }
+  },
+
+  water: {
+    id: {
+      type: 'increments',
+      nullable: false,
+      primary: true
+    },
+    date: {
+      type: 'dateTime',
+      defualt: current_timestamp
+    },
+    idpi: {
+      type: 'text',
+      maxlength: 50,
+      nullable: false
+    },
+    present: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    },
+    watering: {
+      type: 'numeric',
+      nullable: false,
+      unsigned: true
+    }
   }
 
 };
