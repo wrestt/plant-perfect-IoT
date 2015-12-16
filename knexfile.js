@@ -1,20 +1,23 @@
-// Update with your config settings.
-
+var config = require('./env.json')[process.env.NODE_ENV || 'production'];
+var dbUsername = config.PLANTDATA_USERNAME;
+var dbPassword = config.PLANTDATA_PASSWORD;
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'postgresql',
     connection: {
-      filename: './dev.sqlite3'
+      database: 'plantdata',
+      user:     dbUsername,
+      password: dbPassword
     }
   },
 
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: 'plantdata',
+      user:     dbUsername,
+      password: dbPassword
     },
     pool: {
       min: 2,
@@ -28,9 +31,9 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: 'plantdata',
+      user:     dbUsername,
+      password: dbPassword
     },
     pool: {
       min: 2,

@@ -13,7 +13,7 @@ cur = conn.cursor();
 print "Opened database successfully"
 
 def createWaterRecords(data):
-    cur.execute("INSERT INTO water (idpi, watering, present ) VALUES ('%s', '%s', '%s')" % \
+    cur.execute("INSERT INTO water (idpi, watering, available ) VALUES ('%s', '%s', '%s')" % \
         (piId, data[0], data[1])
     )
     conn.commit();
@@ -25,13 +25,13 @@ def createLightRecords(data):
     conn.commit();
     print "Light records created successfully"
 def createSoilRecords(data):
-    cur.execute("INSERT INTO soil(idpi, soilhumidity) VALUES ('%s', '%s')" %\
+    cur.execute("INSERT INTO soil(idpi, humidity) VALUES ('%s', '%s')" %\
         (piId, data[5])
     )
     conn.commit();
     print "Soil records created successfully"
 def createAirRecords(data):
-    cur.execute("INSERT INTO air(idpi, airtemp, airhumidity) VALUES ('%s', '%s', '%s')" % \
+    cur.execute("INSERT INTO air(idpi, airtemp, humidity) VALUES ('%s', '%s', '%s')" % \
         (piId, data[6], data[7])
     )
     conn.commit();
