@@ -89,7 +89,6 @@ void setup(void) {
 }
 
 void basicRead(void) {
-  basicLcdPrint();
   Serial.println(String(button) + ',' + String(waterPresent) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + '\n');
 }
 
@@ -108,7 +107,6 @@ void advancedRead(void) {
 void loop(void) {
   soilHumidity = word(analogRead(A0));
   button = digitalRead(buttonPin);
-  Serial.println(button);
   lum = tsl.getFullLuminosity();
   irLight = lum >> 16;
   fullLight = lum & 0xFFFF;
@@ -116,7 +114,8 @@ void loop(void) {
   luxLight = tsl.calculateLux(fullLight, irLight);
   backlightLcd();
   if (button == 1) {
-    buttonCount +=1
+    buttonCount +=1;
+    basicRead();
     lcd.backlight();
     screenCount = 20;
   } else {
@@ -124,6 +123,7 @@ void loop(void) {
     buttonCount = 0;
     if (count < 10) {
       basicRead();
+      basicLcdPrint();
       count += 1;
     } else {
       count = 0;
@@ -142,3 +142,4 @@ void loop(void) {
   }
   delay(50);
 }
+
