@@ -19,8 +19,7 @@ var Schema = {
       primary: true
     },
     date: {
-      type: 'dateTime',
-      defualt: current_timestamp
+      type: 'timestamp default current_timestamp'
     },
     idpi: {
       type: 'text',
@@ -51,8 +50,7 @@ var Schema = {
       primary: true
     },
     date: {
-      type: 'dateTime',
-      defualt: current_timestamp
+      type: 'timestamp default current_timestamp'
     },
     idpi: {
       type: 'text',
@@ -78,8 +76,7 @@ var Schema = {
       primary: true
     },
     date: {
-      type: 'dateTime',
-      defualt: current_timestamp
+      type: 'timestamp default current_timestamp'
     },
     idpi: {
       type: 'text',
@@ -100,8 +97,7 @@ var Schema = {
       primary: true
     },
     date: {
-      type: 'dateTime',
-      defualt: current_timestamp
+      type: 'timestamp default current_timestamp'
     },
     idpi: {
       type: 'text',
