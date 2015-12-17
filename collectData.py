@@ -13,9 +13,9 @@ cur = conn.cursor();
 
 print "Opened database successfully"
 
-def createPiRecords(piId):
+def createPiRecords(piName):
     try:
-        cur.execute("INSERT INTO pi (pi_id) VALUES ('%s')" % (piId))
+        cur.execute("INSERT INTO pi (name) VALUES ('%s')" % (piName))
         print "Pi records created successfully"
     except:
         print "Pi Record already exists"
@@ -54,9 +54,10 @@ while True:
     if serial_line.find(',') == -1:
         print serial_line
     else:
-        piId = 'WaterIoT'
+        piId = 1
+        piName = "WaterIoT"
         data = serial_line.rstrip('\n').split(',')
-        createPiRecords(piId);
+        createPiRecords(piName);
         if data.__len__() > 6:
             createWaterRecords(piId, data)
             createLightRecords(piId, data)

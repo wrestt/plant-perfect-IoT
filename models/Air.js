@@ -1,13 +1,12 @@
 var Bookshelf = require('./../config/bookshelf').bookshelf;
-Bookshelf.plugin('registry');
+
+require('./Pi');
 
 var Air = Bookshelf.Model.extend({
   tableName: 'air',
-
   hasTimestamps: true,
-
-  idpi: function() {
-    return this.belongsTo(Pi);
+  pi: function() {
+    return this.belongsTo('Pi');
   }
 });
 

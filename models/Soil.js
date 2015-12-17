@@ -1,13 +1,11 @@
 var Bookshelf = require('./../config/bookshelf').bookshelf;
-Bookshelf.plugin('registry');
+require('./Pi');
 
 var Soil = Bookshelf.Model.extend({
   tableName: 'soil',
-
   hasTimestamps: true,
-
-  idpi: function() {
-    return this.belongsTo(Pi);
+  pi: function() {
+    return this.belongsTo('Pi');
   }
 });
 

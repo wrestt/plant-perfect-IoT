@@ -1,7 +1,6 @@
 var Air = require('./../models/Air');
 
 app.get('/airs/:id', function(req, res) {
-  var piId = req.params.id;
   Air.forge({id: req.params.id})
   .fetchAll()
     .then(function(pi) {

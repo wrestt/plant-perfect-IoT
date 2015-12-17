@@ -3,11 +3,11 @@ var Pi = require('./../models/Pi');
 app.get('/pis/:id', function(req, res) {
   Pi.forge({id: req.params.id})
   .fetchAll({withRelated: ['Light', 'Soil', 'Water', 'Air']})
-  .then(function(pi) {
-    if (!pi) {
+  .then(function(Pi) {
+    if (!Pi) {
       res.status(404).json({error: true, data: {}});
     } else {
-      res.json({error: false, data: pi.toJSON()});
+      res.json({error: false, data: Pi.toJSON()});
     }
   }).catch(function(err) {
       res.status(500).json({error: true, data: {message: err.message}});
