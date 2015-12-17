@@ -1,26 +1,25 @@
-var bookshelf = require('./../config/bookshelf').bookshelf;
+var Bookshelf = require('./../config/bookshelf').bookshelf;
+Bookshelf.plugin('registry');
 
-var Pi = bookshelf.Model.extend({
+var Pi = Bookshelf.Model.extend({
   tableName: 'pi',
 
-  airs: function() {
-    return this.hasMany(Air, 'idpi');
+  Air: function() {
+    return this.hasMany('Air');
   },
 
-  soils: function() {
-    return this.hasMany(Soil, 'idpi');
+  Soil: function() {
+    return this.hasMany('Soil');
   },
 
-  waters: function() {
-    return this.hasMany(Water, 'idpi');
+  Water: function() {
+    return this.hasMany('Water');
   },
 
-  lights: function() {
-    return this.hasMany(Light, 'idpi');
+  Light: function() {
+    return this.hasMany('Light');
   }
 
 });
 
-module.exports = {
-  Pi: Pi
-};
+module.exports = Bookshelf.model('Pi', Pi);

@@ -1,8 +1,9 @@
-var Model = require('./../models/Air');
+var Air = require('./../models/Air');
 
 app.get('/airs/:id', function(req, res) {
   var piId = req.params.id;
-  new Model.Air().where('idpi', piId).fetchAll()
+  Air.forge({id: req.params.id})
+  .fetchAll()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
@@ -11,7 +12,8 @@ app.get('/airs/:id', function(req, res) {
 });
 
 app.get('/airs', function(req, res) {
-  new Model.Air().fetchAll()
+  Air.forge()
+  .fetchAll()
     .then(function(pis) {
       res.json(pis);
     }).catch(function(error) {

@@ -1,6 +1,7 @@
-var bookshelf = require('./../config/bookshelf').bookshelf;
+var Bookshelf = require('./../config/bookshelf').bookshelf;
+Bookshelf.plugin('registry');
 
-var Air = bookshelf.Model.extend({
+var Air = Bookshelf.Model.extend({
   tableName: 'air',
 
   hasTimestamps: true,
@@ -10,6 +11,4 @@ var Air = bookshelf.Model.extend({
   }
 });
 
-module.exports = {
-  Air: Air
-};
+module.exports = Bookshelf.model('Air', Air);

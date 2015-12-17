@@ -1,8 +1,8 @@
-var Model = require('./../models/Soil');
+var Soil = require('./../models/Soil');
 
 app.get('/soils/:id', function(req, res) {
-  var piId = req.params.id;
-  new Model.Soil().where('idpi', piId).fetch()
+  Soil.forge({id: req.params.id})
+  .fetchAll()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
@@ -11,7 +11,8 @@ app.get('/soils/:id', function(req, res) {
 });
 
 app.get('/soils', function(req, res) {
-  new Model.Soil().fetchAll()
+  Soil.forge()
+  .fetchAll()
     .then(function(pis) {
       res.json(pis);
     }).catch(function(error) {

@@ -1,8 +1,8 @@
-var Model = require('./../models/Water');
+var Water = require('./../models/Water');
 
 app.get('/waters/:id', function(req, res) {
-  var piId = req.params.id;
-  new Model.Water().where('idpi', piId).fetch()
+  Water.forge({id: req.params.id})
+  .fetchAll()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
@@ -11,7 +11,8 @@ app.get('/waters/:id', function(req, res) {
 });
 
 app.get('/waters', function(req, res) {
-  new Model.Water().fetchAll()
+  Water.forge()
+  .fetchAll()
     .then(function(pis) {
       res.json(pis);
     }).catch(function(error) {

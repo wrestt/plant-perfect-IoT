@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('light', function(table) {
     table.increments('id').primary();
-    table.string('idpi');
+    table.string('pi_id').references('pi.pi_id');
 
     table.decimal(('ir'), [8], [2]);
     table.decimal(('lux'), [8], [2]);

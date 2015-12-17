@@ -1,6 +1,7 @@
-var bookshelf = require('./../config/bookshelf').bookshelf;
+var Bookshelf = require('./../config/bookshelf').bookshelf;
+Bookshelf.plugin('registry');
 
-var Soil = bookshelf.Model.extend({
+var Soil = Bookshelf.Model.extend({
   tableName: 'soil',
 
   hasTimestamps: true,
@@ -10,6 +11,4 @@ var Soil = bookshelf.Model.extend({
   }
 });
 
-module.exports = {
-  Soil: Soil
-};
+module.exports = Bookshelf.model('Soil', Soil);
