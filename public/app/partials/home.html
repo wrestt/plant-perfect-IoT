@@ -1,21 +1,15 @@
-<div class="row">
+<div class="row" ng-init="vm.fetchPis()">
   <div class="col s6 offset-m3 ">
     <div class="card #eeeeee grey lighten-3">
       <div class="card-content mako">
         <span class="card-title">Select Pi</span>
-        <form action="#">
+        <form action="#" ng-repeat="pi in vm.pis">
           <p>
-            <input name="group1" type="radio" id="test1" />
-            <label for="test1">Red</label>
+            <input ng-click="vm.fetchPi(pi[0])" class="with-gap" name="{{pi[0].id}}" type="radio" id="{{pi[0].id}}" />
+            <label for="{{pi[0].id}}">{{pi[0].name}}</label>
           </p>
         </form>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col 12 m12">
-    <button type="button" ng-click="vm.buttonFetchPis()">Fetch All Pi's</button>
   </div>
 </div>

@@ -4,11 +4,16 @@
     .controller('MainController', ['$scope', 'PiData',
       function($scope, PiData) {
         var vm = this;
+        vm.pis = PiData.pis;
 
-        vm.buttonFetchPis = function() {
-          console.log('pressed');
+        vm.fetchPis = function() {
+          console.log('called fetch pis');
           PiData.fetchPis();
         };
+
+        vm.fetchPi = function(data) {
+          console.log(data);
+        }
 
       }
     ]);
