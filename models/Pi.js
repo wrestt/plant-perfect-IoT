@@ -17,6 +17,9 @@ var Pi = Bookshelf.Model.extend({
   },
   Light: function() {
     return this.hasMany('Light');
+  },
+  Schedule: function() {
+    return this.hasOne('Schedule');
   }
 
 });
