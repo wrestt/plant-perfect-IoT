@@ -13,7 +13,8 @@
 
         vm.fetchPi = function(data) {
           console.log(data);
-        }
+          PiData.fetchPi(data);
+        };
 
       }
     ]);
