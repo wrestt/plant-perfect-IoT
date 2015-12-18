@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/app'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + '/bower_components'));
 
 require('./controllers/index');
 
