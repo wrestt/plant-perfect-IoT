@@ -28,7 +28,7 @@
         PiData.light.push(data.data.data[0]['Light']);
         PiData.soil.push(data.data.data[0]['Soil']);
         PiData.air.push(data.data.data[0]['Air']);
-        console.log(PiData.air);
+        console.log(PiData.soil);
       }, function errCallback(response) {
         console.log('Error while fetching Pis');
       });

@@ -36,7 +36,25 @@
             </tr>
           </tbody>
         </table>
-      </div>
+
+      </br>
+      <table>
+        <thead>
+          <tr>
+            <th data-field="number">Date</th>
+            <th data-field="number">Humidity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="set in vm.soilSets[0]">
+            <td>{{set.created_at}}</td>
+            <td>{{set.humidity}}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   </div>
+</div>
 </div>
