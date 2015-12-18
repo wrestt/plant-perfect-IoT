@@ -24,10 +24,13 @@
       $http({
         method: 'GET',
         url: '/pis/' + data.id
-      }).then(function successCallback(data) {
-        PiData.light.push(data.data.data[0]['Light']);
-        PiData.soil.push(data.data.data[0]['Soil']);
-        PiData.air.push(data.data.data[0]['Air']);
+      }).then(function successCallback(response) {
+        var body = response.data;
+
+        console.log(body);
+        PiData.light.push(body.data[0]['Light']);
+        PiData.soil.push(body.data[0]['Soil']);
+        PiData.air.push(body.data[0]['Air']);
         console.log(PiData.soil);
       }, function errCallback(response) {
         console.log('Error while fetching Pis');
