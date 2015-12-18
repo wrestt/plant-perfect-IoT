@@ -5,6 +5,9 @@
       function($scope, PiData) {
         var vm = this;
         vm.pis = PiData.pis;
+        vm.lightSets = PiData.light;
+        vm.soilSets = PiData.soil;
+        vm.airSets = PiData.air;
 
         vm.fetchPis = function() {
           console.log('called fetch pis');
@@ -13,6 +16,8 @@
 
         vm.fetchPi = function(data) {
           console.log(data);
+          vm.piName = data.name;
+          console.log(vm.piName);
           PiData.fetchPi(data);
         };
 

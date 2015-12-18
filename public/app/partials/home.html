@@ -5,10 +5,37 @@
         <span class="card-title">Select Pi</span>
         <form action="#" ng-repeat="pi in vm.pis">
           <p>
-            <input ng-click="vm.fetchPi(pi[0])" class="with-gap" name="{{pi[0].id}}" type="radio" id="{{pi[0].id}}" />
+            <input class="with-gap" id="{{pi[0].id}}" name="{{pi[0].id}}" ng-click="vm.fetchPi(pi[0])" type="radio"/>
             <label for="{{pi[0].id}}">{{pi[0].name}}</label>
           </p>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" ng-if="vm.piName">
+  <div class="col s8 offset-m2 ">
+    <div class="card #eeeeee grey lighten-3">
+      <div class="card-content mako">
+        <span class="card-title">{{vm.piName}}
+          Data</span>
+        <table>
+          <thead>
+            <tr>
+              <th data-field="number">Date</th>
+              <th data-field="number">Temperature (F)</th>
+              <th data-field="number">Humidity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="set in vm.airSets[0]">
+              <td>{{set.created_at}}</td>
+              <td>{{set.temp}}</td>
+              <td>{{set.humidity}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
