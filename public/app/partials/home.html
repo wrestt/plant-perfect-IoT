@@ -31,9 +31,13 @@
             <button type="button" name="button">Timer</button>
           </form>
           <form ng-show="checked" action="#">
-            <p class="range-field">
-              <input type="range" id="test5" min="0" max="100" />
+            <p ng-if="slider">
+              {{slider}}%
             </p>
+            <p class="range-field">
+              <input type="range" id="test5" min="0" max="100" ng-model="slider" />
+            </p>
+            <button type="button" name="automation" ng-click="vm.setAutomation()">Set</button>
           </form>
         </div>
       </div>
