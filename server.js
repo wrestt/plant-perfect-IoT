@@ -12,6 +12,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + '/node_modules'));
 
 require('./controllers/index');
 

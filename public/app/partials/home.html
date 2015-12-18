@@ -13,11 +13,40 @@
     </div>
   </div>
 </div>
-<div class="row" ng-if="vm.piName">
+
+<div class="row" ng-if="vm.pi">
+  <div class="col s6 offset-m3 ">
+    <div class="card #eeeeee grey lighten-3">
+      <div class="card-content mako">
+        <span class="card-title">Scheduling</span>
+        <div class="switch">
+          <label>
+            Timer
+            <input type="checkbox" ng-model="checked">
+            <span class="lever"></span>
+            Automatic
+          </label>
+        </br></br>
+          <form ng-hide="checked" action="#">
+            <button type="button" name="button">Timer</button>
+          </form>
+          <form ng-show="checked" action="#">
+            <p class="range-field">
+              <input type="range" id="test5" min="0" max="100" />
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" ng-if="vm.pi">
   <div class="col s8 offset-m2 ">
     <div class="card #eeeeee grey lighten-3">
       <div class="card-content mako">
-        <span class="card-title">{{vm.piName}}
+        <span class="card-title">{{vm.pi.name}}
           Data</span>
         <div class="content_scroll">
           <table>

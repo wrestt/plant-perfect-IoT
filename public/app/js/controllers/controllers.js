@@ -16,8 +16,7 @@
 
         vm.fetchPi = function(data) {
           console.log(data);
-          vm.piName = data.name;
-          console.log(vm.piName);
+          vm.pi = data;
           PiData.fetchPi(data);
         };
 
