@@ -1,9 +1,4 @@
 var Pi = require('./../models/Pi');
-var crontab = require('./../node_modules/node-crontab');
-var crontab = require('node-crontab');
-var jobId = crontab.scheduleJob('* * * * *', function(a) {
-  console.log('Hello ' + a + '! Its been a minute!');
-}, ['World']);
 
 app.get('/pis/:id', function(req, res) {
   Pi.forge({id: req.params.id})

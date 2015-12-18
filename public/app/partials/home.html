@@ -27,8 +27,46 @@
             Automatic
           </label>
         </br></br>
-          <form ng-hide="checked" action="#">
-            <button type="button" name="button">Timer</button>
+          <form ng-hide="checked" action="#" class="left-align">
+            <ul>
+              <li>
+                <input type="checkbox" id="monday" ng-model="schedule.monday" />
+                <label for="monday">Monday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="tuesday" ng-model="schedule.tuesday">
+                <label for="tuesday">Tuesday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="wednesday" ng-model="schedule.wednesday">
+                <label for="wednesday">Wednesday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="thursday" ng-model="schedule.thursday">
+                <label for="thursday">Thursday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="friday" ng-model="schedule.friday">
+                <label for="friday">Friday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="saturday" ng-model="schedule.saturday">
+                <label for="saturday">Saturday</label>
+              </li>
+              <li>
+                <input type="checkbox" id="sunday" ng-model="schedule.sunday">
+                <label for="sunday">Sunday</label>
+              </li>
+              <li>
+                <div class="input-field">
+                  <i class="material-icons prefix">schedule</i>
+                  <input id="interval" type="number" class="validate" ng-model="schedule.interval">
+                  <label for="interval">Interval</label>
+                </div>
+              </li>
+            </ul>
+          </br>
+            <button type="button" name="button" ng-click="vm.setSchedule(schedule)">Submit Schedule</button>
           </form>
           <form ng-show="checked" action="#">
             <p ng-if="slider">

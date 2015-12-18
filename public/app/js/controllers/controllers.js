@@ -20,6 +20,9 @@
           PiData.fetchPi(data);
         };
 
+        vm.setSchedule = function(data) {
+          console.log(data);
+        };
       }
     ]);
 })();
