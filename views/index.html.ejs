@@ -4,10 +4,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Plant Perfect IoT</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/app/css/main.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="/angular/angular.min.js" type="text/javascript"></script>
     <script src="/angular-route/angular-route.min.js" type="text/javascript"></script>
     <script src="/angular-resource/angular-resource.min.js" type="text/javascript"></script>
@@ -19,7 +19,16 @@
   </head>
 
   <body>
-    <ng-view>
+    <div id="title">
+      <div id="title-container">
+        <img  class="center-align" id="leaf-logo" src="/app/images/leaf.png" alt="fig logot"/>
+        <h2 class="center-align">Plant Perfect I.o.T</h2>
+        <h6 class="center-align">- Teagan Wrest </h6>
+      </div>
+    </div>
+    <div class="container" id="main-content">
+      <ng-view>
+    </div>
   </body>
 
 </html>
