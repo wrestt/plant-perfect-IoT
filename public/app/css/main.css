@@ -5,7 +5,7 @@ body {
 
 #title{
   color: #eeeeee;
-  margin-top: 50vh;
+  margin-top: 25vh;
 }
 
 #leaf-logo{
@@ -19,4 +19,9 @@ body {
 }
 .mako{
   color: #454E54;
+}
+
+.content_scroll{
+  overflow-y: scroll;
+  max-height: 300px;
 }

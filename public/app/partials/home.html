@@ -19,63 +19,67 @@
       <div class="card-content mako">
         <span class="card-title">{{vm.piName}}
           Data</span>
-        <table>
+        <div class="content_scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="number">Date</th>
+                <th data-field="number">Temperature (F)</th>
+                <th data-field="number">Humidity</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="set in vm.airSets[0]">
+                <td>{{set.created_at}}</td>
+                <td>{{set.temp}}</td>
+                <td>{{set.humidity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </br>
+      <div class="content_scroll">
+        <table >
           <thead>
             <tr>
               <th data-field="number">Date</th>
-              <th data-field="number">Temperature (F)</th>
               <th data-field="number">Humidity</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr ng-repeat="set in vm.airSets[0]">
+            <tr ng-repeat="set in vm.soilSets[0]">
               <td>{{set.created_at}}</td>
-              <td>{{set.temp}}</td>
               <td>{{set.humidity}}</td>
             </tr>
           </tbody>
         </table>
+      </div>
 
-      </br>
+    </br>
+    <div class="content_scroll">
       <table>
         <thead>
           <tr>
             <th data-field="number">Date</th>
-            <th data-field="number">Humidity</th>
+            <th data-field="number">Lux</th>
+            <th data-field="number">IR</th>
+            <th data-field="number">Visible</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr ng-repeat="set in vm.soilSets[0]">
+          <tr ng-repeat="set in vm.lightSets[0]">
             <td>{{set.created_at}}</td>
-            <td>{{set.humidity}}</td>
+            <td>{{set.lux}}</td>
+            <td>{{set.ir}}</td>
+            <td>{{set.visible}}</td>
           </tr>
         </tbody>
       </table>
-
-    </br>
-    <table>
-      <thead>
-        <tr>
-          <th data-field="number">Date</th>
-          <th data-field="number">Lux</th>
-          <th data-field="number">IR</th>
-          <th data-field="number">Visible</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="set in vm.lightSets[0]">
-          <td>{{set.created_at}}</td>
-          <td>{{set.lux}}</td>
-          <td>{{set.ir}}</td>
-          <td>{{set.visible}}</td>
-        </tr>
-      </tbody>
-    </table>
-
     </div>
   </div>
+</div>
 </div>
 </div>
