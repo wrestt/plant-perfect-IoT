@@ -3,12 +3,22 @@ var spawn = require('child_process').spawn;
 var high = spawn('python', ['./../pumpStart.py']);
 var low = spawn('python', ['./../pumpStop.py']);
 
-function start(argument) {
+function start() {
   high.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
 
   high.stderr.on('data', function(data) {
+    console.log('stderr: ' + data);
+  });
+};
+
+function stop() {
+  low.stdout.on('data', function(data) {
+    console.log('stdout: ' + data);
+  });
+
+  low.stderr.on('data', function(data) {
     console.log('stderr: ' + data);
   });
 };
