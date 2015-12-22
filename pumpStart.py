@@ -4,9 +4,12 @@ GPIO.setup(11, GPIO.OUT)
 
 try:
     GPIO.output(pin, GPIO.high)
+    return "high"
 except KeyboardInterrupt:
-    print "\n Ending"
+    return "Error"
+    print "\n Stopped by Keyboard"
 except:
-    print "Eorror occurred with setting GPIO pin to high"
+    return "Error"
+    print "Error occurred with setting GPIO pin to high"
 finally:
     GPIO.cleanup()
