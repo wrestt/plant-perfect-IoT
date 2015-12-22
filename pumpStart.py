@@ -6,10 +6,10 @@ try:
     GPIO.output(pin, GPIO.high)
     return "high"
 except KeyboardInterrupt:
-    return "Error"
+    return "stopped pin high by keyboard"
     print "\n Stopped by Keyboard"
 except:
-    return "Error"
+    return "error setting pin high"
     print "Error occurred with setting GPIO pin to high"
 finally:
     GPIO.cleanup()
