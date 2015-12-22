@@ -3,3 +3,4 @@ require('./light');
 require('./pi');
 require('./soil');
 require('./water');
+require('./schedule');

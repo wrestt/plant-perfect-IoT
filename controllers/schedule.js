@@ -1,10 +1,12 @@
 var Schedule = require('./../models/Schedule');
 var spawn = require('child_process').spawn;
-var high = spawn('python', ['./../pumpStart.py']);
-var low = spawn('python', ['./../pumpStop.py']);
+// var high = spawn('python', ['./../pumpStart.py']);
+// var low = spawn('python', ['./../pumpStop.py']);
+var scheduleInfo;
 
-function start() {
+function start(pi) {
   high.stdout.on('data', function(data) {
+    timer(pi);
     console.log('stdout: ' + data);
   });
 
@@ -13,7 +15,7 @@ function start() {
   });
 };
 
-function stop() {
+function stop(pi) {
   low.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
@@ -23,9 +25,26 @@ function stop() {
   });
 };
 
+
+function timer() {
+  Schedule.forge({id: 1})
+  .fetch()
+    .then(function(pi) {
+      if (pi.attributes.auto === true) {
+        console.log('Set to auto');
+      } else {
+        console.log('Set to schedule');
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
+};
+
+timer();
+
 app.get('/schedules/:id', function(req, res) {
   Schedule.forge({id: req.params.id})
-  .fetchAll()
+  .fetch()
     .then(function(pi) {
       res.json(pi);
     }).catch(function(error) {
