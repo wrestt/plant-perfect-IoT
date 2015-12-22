@@ -20,12 +20,12 @@
     "body-parser": "^1.14.1",
     "bookshelf": "^0.9.1",
     "cookie-session": "^1.2.0",
+    "cron": "^1.1.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "knex": "^0.9.0",
     "lodash": "^3.10.1",
     "method-override": "^2.3.5",
-    "node-crontab": "0.0.8",
     "when": "^3.7.5"
   }
 }
