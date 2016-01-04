@@ -23,6 +23,10 @@
         vm.setSchedule = function(data) {
           console.log(data);
         };
+
+        vm.setAutomation = function(data) {
+          console.log(data);
+        };
       }
     ]);
 })();
