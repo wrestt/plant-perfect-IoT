@@ -3,7 +3,6 @@ var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
 var high = spawn('python', ['./../pumpStart.py']);
 var low = spawn('python', ['./../pumpStop.py']);
-var scheduleInfo;
 var week = [
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
 ];
@@ -45,12 +44,12 @@ function stop() {
 function timer(id, interval) {
   Schedule.forge({id: id})
   .fetch()
-    .then(function(pi) {
-      if (pi.attributes.auto === true) {
+    .then(function(arduino) {
+      if (arduino.attributes.auto === true) {
         console.log('Set to auto');
       } else {
         week.forEach(function(day) {
-          if (pi.attributes[day] === true) {
+          if (arduino.attributes[day] === true) {
             var job = new CronJob('00 30 10 * * ' + dayCount, function() {
               start(id, interval);
             }, function() {
@@ -83,8 +82,8 @@ arduinos();
 app.get('/schedules', function(req, res) {
   Schedule.forge()
   .fetchAll()
-    .then(function(pis) {
-      res.json(pis);
+    .then(function(arduinos) {
+      res.json(arduinos);
     }).catch(function(error) {
       res.json(error);
     });
@@ -93,8 +92,8 @@ app.get('/schedules', function(req, res) {
 app.get('/schedules/:id', function(req, res) {
   Schedule.forge({id: req.params.id})
   .fetch()
-    .then(function(pi) {
-      res.json(pi);
+    .then(function(arduino) {
+      res.json(arduino);
     }).catch(function(error) {
       res.json(error);
     });
@@ -102,22 +101,43 @@ app.get('/schedules/:id', function(req, res) {
 
 apiRouter.route('/schedules/:id')
 .put(function(req, res) {
-  new Schedule({id: req.body[0].pi_id, pi_id: req.body[0].pi_id})
+  var scheduleData = req.body[0];
+  new Schedule({id: scheduleData.pi_id, pi_id: scheduleData.pi_id})
     .save({
-      auto: req.body[0].auto,
-      humidity: req.body[0].humidity,
-      interval: req.body[0].interval,
-      monday: req.body[0].monday,
-      tuesday: req.body[0].tuesday,
-      wednesday: req.body[0].wednesday,
-      thursday: req.body[0].thursday,
-      friday: req.body[0].friday,
-      saturday: req.body[0].saturday,
-      sunday: req.body[0].sunday
+      auto: scheduleData.auto,
+      humidity: scheduleData.humidity,
+      interval: scheduleData.interval,
+      monday: scheduleData.monday,
+      tuesday: scheduleData.tuesday,
+      wednesday: scheduleData.wednesday,
+      thursday: scheduleData.thursday,
+      friday: scheduleData.friday,
+      saturday: scheduleData.saturday,
+      sunday: scheduleData.sunday
     },
-      {method: 'update'})
-    .then(function(data) {
-      timer(req.body[0].pi_id, req.body[0].interval);
+      {method: 'update'}
+    ).then(function() {
+      timer(scheduleData.pi_id, scheduleData.interval);
+    });
+});
+
+apiRouter.route('/schedules/:id')
+.post(function(req, res) {
+  var scheduleData = req.body[0];
+  new Schedule({id: scheduleData.pi_id, pi_id: scheduleData.pi_id})
+    .save({
+      auto: scheduleData.auto,
+      humidity: scheduleData.humidity,
+      interval: scheduleData.interval,
+      monday: scheduleData.monday,
+      tuesday: scheduleData.tuesday,
+      wednesday: scheduleData.wednesday,
+      thursday: scheduleData.thursday,
+      friday: scheduleData.friday,
+      saturday: scheduleData.saturday,
+      sunday: scheduleData.sunday
+    }).then(function() {
+      timer(scheduleData.pi_id, scheduleData.interval);
     });
 });
 
