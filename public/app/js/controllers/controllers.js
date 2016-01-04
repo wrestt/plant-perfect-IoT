@@ -23,13 +23,13 @@
 
         vm.setSchedule = function(obj) {
           obj[0].auto = false;
-          PiData.postAutomation(obj);
+          PiData.putSchedule(obj);
           console.log(obj);
         };
 
         vm.setAutomation = function(obj) {
           obj[0].auto = true;
-          PiData.postAutomation(obj);
+          PiData.putSchedule(obj);
           console.log(obj);
         };
       }

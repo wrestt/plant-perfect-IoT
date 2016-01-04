@@ -29,20 +29,18 @@
         url: '/pis/' + data.id
       }).then(function successCallback(response) {
         var body = response.data;
-        console.log(body);
         PiData.light.push(body.data[0].Light);
         PiData.soil.push(body.data[0].Soil);
         PiData.air.push(body.data[0].Air);
         PiData.schedule.push(body.data[0].Schedule);
-        console.log(PiData);
       }, function errCallback(response) {
         console.log('Error while fetching Pis');
       });
     };
 
-    PiData.postAutomation = function(obj) {
+    PiData.putSchedule = function(obj) {
         $http({
-          method: 'POST',
+          method: 'PUT',
           dataType: 'JSONP',
           url: '/server/schedules/' + PiData.piId[0],
           data: obj

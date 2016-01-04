@@ -13,3 +13,5 @@ except:
     print "Error occurred with setting GPIO pin to low"
 finally:
     GPIO.cleanup()
+
+sys.exit();

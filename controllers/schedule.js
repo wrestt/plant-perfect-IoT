@@ -1,66 +1,75 @@
 var Schedule = require('./../models/Schedule');
+var Pi = require('./../models/Pi');
 var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
-// var high = spawn('python', ['./../pumpStart.py']);
-// var low = spawn('python', ['./../pumpStop.py']);
+var high = spawn('python', ['./../pumpStart.py']);
+var low = spawn('python', ['./../pumpStop.py']);
 var scheduleInfo;
 var week = [
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
 ];
+var dayCount = 1;
 
-function start() {
-  high.stdout.on('data', function(data) {
-    console.log('stdout: ' + data);
-  });
-
-  high.stderr.on('data', function(data) {
-    console.log('stderr: ' + data);
-  });
+function start(id, interval) {
+  // high.stdout.on('data', function(data) {
+  //   console.log('stdout: ' + data);
+  // });
+  //
+  // high.stderr.on('data', function(data) {
+  //   console.log('stderr: ' + data);
+  // });
+  setTimeout(stop, interval * 10000);
 };
 
 function stop() {
-  low.stdout.on('data', function(data) {
-    console.log('stdout: ' + data);
-  });
-
-  low.stderr.on('data', function(data) {
-    console.log('stderr: ' + data);
-  });
+  console.log('stopped');
+  // low.stdout.on('data', function(data) {
+  //   console.log('stdout: ' + data);
+  // });
+  //
+  // low.stderr.on('data', function(data) {
+  //   console.log('stderr: ' + data);
+  // });
 };
 
-function timer() {
-  var days = [];
-  Schedule.forge({id: 1})
+function timer(id, interval) {
+  Schedule.forge(id)
   .fetch()
     .then(function(pi) {
       if (pi.attributes.auto === true) {
         console.log('Set to auto');
       } else {
         week.forEach(function(day) {
-          var job;
-          if (pi.attributes.day !== null) {
-            job = new CronJob('* * * * * ' + pi.attributes.day, function() {
-                console.log('job started');
-                start();
-              }, function() {
-                console.log('job returned');
-                setTimeout(function() {
-                  stop();
-                }, pi.attributes.interval);
+          if (pi.attributes[day] === true) {
+            var job = new CronJob('00 30 11 * * ' + dayCount, function() {
+              start(id, interval);
+                this.stop();
+            }, function() {
+                console.log(day + 'Job Canceled');
               },
-              true,
-              {timeZone: 'America/Los_Angeles'}
-            );
+            true, 'America/Los_Angeles');
+            dayCount ++;
           }
         });
-        console.log('Set to schedule');
       }
     }).catch(function(error) {
       console.log(error);
     });
 };
 
-timer();
+function arduinos() {
+  Schedule.forge()
+  .fetchAll()
+    .then(function(arduinos) {
+      arduinos.forEach(function(arduino) {
+        timer(arduino.attributes.id, arduino.attributes.interval);
+      });
+    }).catch(function(error) {
+      console.log('Err with fetching Ids');
+    });
+}
+
+arduinos();
 
 app.get('/schedules', function(req, res) {
   Schedule.forge()
@@ -83,8 +92,7 @@ app.get('/schedules/:id', function(req, res) {
 });
 
 apiRouter.route('/schedules/:id')
-.post(function(req, res) {
-  console.log(req.body[0].auto);
+.put(function(req, res) {
   new Schedule({id: req.body[0].pi_id, pi_id: req.body[0].pi_id})
     .save({
       auto: req.body[0].auto,
@@ -100,7 +108,7 @@ apiRouter.route('/schedules/:id')
     },
       {method: 'update'})
     .then(function(data) {
-      console.log(data);
+      timer(req.body[0].pi_id, req.body[0].interval);
     });
 });
 
