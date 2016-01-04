@@ -21,12 +21,13 @@
           PiData.fetchPi(data);
         };
 
-        vm.setSchedule = function(data) {
-          console.log(data);
+        vm.setSchedule = function(obj) {
+          obj[0].auto = false;
+          PiData.postAutomation(obj);
+          console.log(obj);
         };
 
         vm.setAutomation = function(obj) {
-          console.log(vm.scheduleSet);
           obj[0].auto = true;
           PiData.postAutomation(obj);
           console.log(obj);

@@ -31,43 +31,43 @@
       <form action="#" class="left-align" ng-hide="vm.checked">
         <ul>
           <li>
-            <input id="monday" ng-model="vm.schedule.monday" type="checkbox"/>
+            <input id="monday" ng-model="vm.scheduleSet[0].monday" type="checkbox"/>
             <label for="monday">Monday</label>
           </li>
           <li>
-            <input id="tuesday" ng-model="vm.schedule.tuesday" type="checkbox">
+            <input id="tuesday" ng-model="vm.scheduleSet[0].tuesday" type="checkbox">
             <label for="tuesday">Tuesday</label>
           </li>
           <li>
-            <input id="wednesday" ng-model="vm.schedule.wednesday" type="checkbox">
+            <input id="wednesday" ng-model="vm.scheduleSet[0].wednesday" type="checkbox">
             <label for="wednesday">Wednesday</label>
           </li>
           <li>
-            <input id="thursday" ng-model="vm.schedule.thursday" type="checkbox">
+            <input id="thursday" ng-model="vm.scheduleSet[0].thursday" type="checkbox">
             <label for="thursday">Thursday</label>
           </li>
           <li>
-            <input id="friday" ng-model="vm.schedule.friday" type="checkbox">
+            <input id="friday" ng-model="vm.scheduleSet[0].friday" type="checkbox">
             <label for="friday">Friday</label>
           </li>
           <li>
-            <input id="saturday" ng-model="vm.schedule.saturday" type="checkbox">
+            <input id="saturday" ng-model="vm.scheduleSet[0].saturday" type="checkbox">
             <label for="saturday">Saturday</label>
           </li>
           <li>
-            <input id="sunday" ng-model="vm.schedule.sunday" type="checkbox">
+            <input id="sunday" ng-model="vm.scheduleSet[0].sunday" type="checkbox">
             <label for="sunday">Sunday</label>
           </li>
           <li>
             <div class="input-field">
               <i class="material-icons prefix">schedule</i>
-              <input class="validate" id="interval" ng-model="vm.schedule.interval" type="number">
+              <input class="validate" id="interval" ng-model="vm.scheduleSet[0].interval" type="number">
               <label for="interval">Interval (minutes)</label>
             </div>
           </li>
         </ul>
       </br>
-      <button name="button" ng-click="vm.setSchedule(schedule)" type="button">Submit Schedule</button>
+      <button class="waves-effect waves-light btn" name="button" ng-click="vm.setSchedule(vm.scheduleSet)" type="button">Submit Schedule</button>
     </form>
     <form action="#" ng-show="vm.checked">
       <p ng-if="vm.scheduleSet">
