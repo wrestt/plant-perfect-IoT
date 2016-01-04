@@ -79,7 +79,8 @@ function arduinos() {
 
 arduinos();
 
-app.get('/schedules', function(req, res) {
+apiRouter.route('/scheudles')
+.get(function(req, res) {
   Schedule.forge()
   .fetchAll()
     .then(function(arduinos) {
@@ -89,7 +90,8 @@ app.get('/schedules', function(req, res) {
     });
 });
 
-app.get('/schedules/:id', function(req, res) {
+apiRouter.route('/schedules/:id')
+.get(function(req, res) {
   Schedule.forge({id: req.params.id})
   .fetch()
     .then(function(arduino) {
