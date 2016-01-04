@@ -10,14 +10,25 @@ var week = [
 var dayCount = 1;
 
 function start(id, interval) {
-  high.stdout.on('data', function(data) {
-    console.log('stdout: ' + data);
-  });
+  Schedule.forge({id: id})
+  .fetch()
+    .then(function(arduino) {
+      if (arduino.attributes.auto === false) {
+        high.stdout.on('data', function(data) {
+          console.log('stdout: ' + data);
+        });
 
-  high.stderr.on('data', function(data) {
-    console.log('stderr: ' + data);
-  });
-  setTimeout(stop, interval * 10000);
+        high.stderr.on('data', function(data) {
+          console.log('stderr: ' + data);
+        });
+        setTimeout(stop, interval * 10000);
+      } else {
+        stop();
+      }
+    }).catch(function(error) {
+      res.json(error);
+      stop();
+    });
 };
 
 function stop() {
@@ -32,7 +43,7 @@ function stop() {
 };
 
 function timer(id, interval) {
-  Schedule.forge(id)
+  Schedule.forge({id: id})
   .fetch()
     .then(function(pi) {
       if (pi.attributes.auto === true) {
@@ -42,7 +53,6 @@ function timer(id, interval) {
           if (pi.attributes[day] === true) {
             var job = new CronJob('00 30 10 * * ' + dayCount, function() {
               start(id, interval);
-              this.stop();
             }, function() {
                 console.log(day + 'Job Canceled');
               },
@@ -52,7 +62,7 @@ function timer(id, interval) {
         });
       }
     }).catch(function(error) {
-      console.log(error);
+      console.log('Scheduling Err ' + error);
     });
 };
 
