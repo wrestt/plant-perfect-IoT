@@ -8,6 +8,7 @@
         vm.lightSets = PiData.light;
         vm.soilSets = PiData.soil;
         vm.airSets = PiData.air;
+        vm.scheduleSet = PiData.schedule;
 
         vm.fetchPis = function() {
           console.log('called fetch pis');
@@ -25,7 +26,8 @@
         };
 
         vm.setAutomation = function(obj) {
-          obj['auto'] = true;
+          console.log(vm.scheduleSet);
+          obj[0].auto = true;
           PiData.postAutomation(obj);
           console.log(obj);
         };

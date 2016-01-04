@@ -70,13 +70,13 @@
       <button name="button" ng-click="vm.setSchedule(schedule)" type="button">Submit Schedule</button>
     </form>
     <form action="#" ng-show="vm.checked">
-      <p ng-if="vm.schedule">
-        {{vm.schedule.humidity}}%
+      <p ng-if="vm.scheduleSet">
+        {{vm.scheduleSet[0].humidity}}%
       </p>
       <p class="range-field">
-        <input id="test5" max="100" min="0" ng-model="vm.schedule.humidity" type="range"/>
+        <input id="test5" max="100" min="0" ng-model="vm.scheduleSet[0].humidity" type="range"/>
       </p>
-      <button class="waves-effect waves-light btn" name="automation" ng-click="vm.setAutomation(vm.schedule)" type="button">Set</button>
+      <button class="waves-effect waves-light btn" name="automation" ng-click="vm.setAutomation(vm.scheduleSet)" type="button">Set</button>
     </form>
   </div>
 </div>
