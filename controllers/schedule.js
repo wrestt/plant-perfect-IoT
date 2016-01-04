@@ -8,9 +8,8 @@ var week = [
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
 ];
 
-function start(pi) {
+function start() {
   high.stdout.on('data', function(data) {
-    timer(pi);
     console.log('stdout: ' + data);
   });
 
@@ -19,7 +18,7 @@ function start(pi) {
   });
 };
 
-function stop(pi) {
+function stop() {
   low.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
@@ -28,7 +27,6 @@ function stop(pi) {
     console.log('stderr: ' + data);
   });
 };
-
 
 function timer() {
   var days = [];
@@ -43,8 +41,12 @@ function timer() {
           if (pi.attributes.day !== null) {
             job = new CronJob('* * * * * ' + pi.attributes.day, function() {
                 console.log('job started');
+                start();
               }, function() {
                 console.log('job returned');
+                setTimeout(function() {
+                  stop();
+                }, pi.attributes.interval);
               },
               true,
               {timeZone: 'America/Los_Angeles'}
