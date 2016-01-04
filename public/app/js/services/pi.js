@@ -32,7 +32,28 @@
         PiData.light.push(body.data[0].Light);
         PiData.soil.push(body.data[0].Soil);
         PiData.air.push(body.data[0].Air);
-        PiData.schedule.push(body.data[0].Schedule);
+        Pidata.schedule(body.data[0].Schedule);
+      }, function errCallback(response) {
+        console.log('Error while fetching Pis');
+      });
+    };
+
+    PiData.schedule = function(obj) {
+      if (obj.length() < 1) {
+        PiData.postSchedule();
+      } else {
+        PiData.schedule.push(obj);
+      }
+    };
+
+    PiData.postSchedule = function() {
+      $http({
+        method: 'POST',
+        dataType: 'JSONP',
+        url: '/server/schedules' + PiData.piId[0],
+        data: {pi_id: PiData.piId[0], auto: false}
+      }).then(function successCallback(response) {
+        console.log(response);
       }, function errCallback(response) {
         console.log('Error while fetching Pis');
       });
@@ -45,11 +66,9 @@
           url: '/server/schedules/' + PiData.piId[0],
           data: obj
         }).then(function successCallback(response) {
-          if (response.data) {
-            console.log(response);
-          } else {
-            console.log('FAILED TO POST DATA');
-          }
+          console.log(response);
+        }, function errCallback(response) {
+          console.log('Error while fetching Pis');
         });
       };
 
