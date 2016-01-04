@@ -24,9 +24,10 @@
           console.log(data);
         };
 
-        vm.setAutomation = function(data) {
-          PiData.postAutomation(data);
-          console.log(data);
+        vm.setAutomation = function(obj) {
+          obj["auto"] = true;
+          PiData.postAutomation(obj);
+          console.log(obj);
         };
       }
     ]);

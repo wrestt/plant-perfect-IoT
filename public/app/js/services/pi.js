@@ -38,17 +38,20 @@
       });
     };
 
-    PiData.postAutomation = function(data) {
-      $http({
-        method: 'POST',
-        url: '/schedules/' + PiData.piId[0],
-        data: data
-      }).then(function successCallback(response) {
-        console.log('success', + data);
-      }).then(function errCallback(response) {
-        console.log('Error while posting schedule');
-      });
-    };
+    PiData.postAutomation = function(obj) {
+        $http({
+          method: 'POST',
+          dataType: 'JSONP',
+          url: '/server/schedules/' + PiData.piId[0],
+          data: obj
+        }).then(function successCallback(response) {
+          if (response.data) {
+            console.log(response);
+          } else {
+            console.log('FAILED TO POST DATA');
+          }
+        });
+      };
 
     return PiData;
   }]);

@@ -22,46 +22,46 @@
         <div class="switch">
           <label>
             Timer
-            <input ng-model="checked" type="checkbox">
+            <input ng-model="vm.checked" type="checkbox">
             <span class="lever"></span>
             Automatic
           </label>
         </br>
       </br>
-      <form action="#" class="left-align" ng-hide="checked">
+      <form action="#" class="left-align" ng-hide="vm.checked">
         <ul>
           <li>
-            <input id="monday" ng-model="schedule.monday" type="checkbox"/>
+            <input id="monday" ng-model="vm.schedule.monday" type="checkbox"/>
             <label for="monday">Monday</label>
           </li>
           <li>
-            <input id="tuesday" ng-model="schedule.tuesday" type="checkbox">
+            <input id="tuesday" ng-model="vm.schedule.tuesday" type="checkbox">
             <label for="tuesday">Tuesday</label>
           </li>
           <li>
-            <input id="wednesday" ng-model="schedule.wednesday" type="checkbox">
+            <input id="wednesday" ng-model="vm.schedule.wednesday" type="checkbox">
             <label for="wednesday">Wednesday</label>
           </li>
           <li>
-            <input id="thursday" ng-model="schedule.thursday" type="checkbox">
+            <input id="thursday" ng-model="vm.schedule.thursday" type="checkbox">
             <label for="thursday">Thursday</label>
           </li>
           <li>
-            <input id="friday" ng-model="schedule.friday" type="checkbox">
+            <input id="friday" ng-model="vm.schedule.friday" type="checkbox">
             <label for="friday">Friday</label>
           </li>
           <li>
-            <input id="saturday" ng-model="schedule.saturday" type="checkbox">
+            <input id="saturday" ng-model="vm.schedule.saturday" type="checkbox">
             <label for="saturday">Saturday</label>
           </li>
           <li>
-            <input id="sunday" ng-model="schedule.sunday" type="checkbox">
+            <input id="sunday" ng-model="vm.schedule.sunday" type="checkbox">
             <label for="sunday">Sunday</label>
           </li>
           <li>
             <div class="input-field">
               <i class="material-icons prefix">schedule</i>
-              <input class="validate" id="interval" ng-model="schedule.interval" type="number">
+              <input class="validate" id="interval" ng-model="vm.schedule.interval" type="number">
               <label for="interval">Interval (minutes)</label>
             </div>
           </li>
@@ -69,14 +69,14 @@
       </br>
       <button name="button" ng-click="vm.setSchedule(schedule)" type="button">Submit Schedule</button>
     </form>
-    <form action="#" ng-show="checked">
-      <p ng-if="slider">
-        {{slider}}%
+    <form action="#" ng-show="vm.checked">
+      <p ng-if="vm.schedule">
+        {{vm.schedule.humidity}}%
       </p>
       <p class="range-field">
-        <input id="test5" max="100" min="0" ng-model="slider" type="range"/>
+        <input id="test5" max="100" min="0" ng-model="vm.schedule.humidity" type="range"/>
       </p>
-      <button class="waves-effect waves-light btn" name="automation" ng-click="vm.setAutomation(slider)" type="button">Set</button>
+      <button class="waves-effect waves-light btn" name="automation" ng-click="vm.setAutomation(vm.schedule)" type="button">Set</button>
     </form>
   </div>
 </div>

@@ -62,6 +62,16 @@ function timer() {
 
 timer();
 
+app.get('/schedules', function(req, res) {
+  Schedule.forge()
+  .fetchAll()
+    .then(function(pis) {
+      res.json(pis);
+    }).catch(function(error) {
+      res.json(error);
+    });
+});
+
 app.get('/schedules/:id', function(req, res) {
   Schedule.forge({id: req.params.id})
   .fetch()
@@ -72,12 +82,9 @@ app.get('/schedules/:id', function(req, res) {
     });
 });
 
-app.get('/schedules', function(req, res) {
-  Schedule.forge()
-  .fetchAll()
-    .then(function(pis) {
-      res.json(pis);
-    }).catch(function(error) {
-      res.json(error);
-    });
+apiRouter.route('/schedules/:id')
+.post(function(req, res) {
+  console.log(req.body);
 });
+
+app.use('/server', apiRouter);
