@@ -3,6 +3,7 @@ require('./Air');
 require('./Soil');
 require('./Water');
 require('./Light');
+require('./Schedule');
 
 var Pi = Bookshelf.Model.extend({
   tableName: 'pi',

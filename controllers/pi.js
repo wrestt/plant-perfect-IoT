@@ -2,7 +2,7 @@ var Pi = require('./../models/Pi');
 
 app.get('/pis/:id', function(req, res) {
   Pi.forge({id: req.params.id})
-  .fetchAll({withRelated: ['Light', 'Soil', 'Water', 'Air']})
+  .fetchAll({withRelated: ['Light', 'Soil', 'Water', 'Air', 'Schedule']})
   .then(function(Pi) {
     if (!Pi) {
       res.status(404).json({error: true, data: {}});

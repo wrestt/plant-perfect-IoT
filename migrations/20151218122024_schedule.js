@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('schedule', function(table) {
     table.increments('id').primary();
-    table.integer('pi_id').references('pi.id').unique();
+    table.integer('pi_id').unique().references('pi.id');
 
     table.boolean('auto');
     table.integer('humidity');

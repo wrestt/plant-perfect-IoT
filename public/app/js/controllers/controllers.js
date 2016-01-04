@@ -25,7 +25,7 @@
         };
 
         vm.setAutomation = function(obj) {
-          obj["auto"] = true;
+          obj['auto'] = true;
           PiData.postAutomation(obj);
           console.log(obj);
         };
