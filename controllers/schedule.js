@@ -1,5 +1,4 @@
 var Schedule = require('./../models/Schedule');
-var Pi = require('./../models/Pi');
 var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
 var high = spawn('python', ['./../pumpStart.py']);
@@ -11,25 +10,25 @@ var week = [
 var dayCount = 1;
 
 function start(id, interval) {
-  // high.stdout.on('data', function(data) {
-  //   console.log('stdout: ' + data);
-  // });
-  //
-  // high.stderr.on('data', function(data) {
-  //   console.log('stderr: ' + data);
-  // });
+  high.stdout.on('data', function(data) {
+    console.log('stdout: ' + data);
+  });
+
+  high.stderr.on('data', function(data) {
+    console.log('stderr: ' + data);
+  });
   setTimeout(stop, interval * 10000);
 };
 
 function stop() {
   console.log('stopped');
-  // low.stdout.on('data', function(data) {
-  //   console.log('stdout: ' + data);
-  // });
-  //
-  // low.stderr.on('data', function(data) {
-  //   console.log('stderr: ' + data);
-  // });
+  low.stdout.on('data', function(data) {
+    console.log('stdout: ' + data);
+  });
+
+  low.stderr.on('data', function(data) {
+    console.log('stderr: ' + data);
+  });
 };
 
 function timer(id, interval) {
@@ -41,9 +40,9 @@ function timer(id, interval) {
       } else {
         week.forEach(function(day) {
           if (pi.attributes[day] === true) {
-            var job = new CronJob('00 30 11 * * ' + dayCount, function() {
+            var job = new CronJob('00 30 10 * * ' + dayCount, function() {
               start(id, interval);
-                this.stop();
+              this.stop();
             }, function() {
                 console.log(day + 'Job Canceled');
               },

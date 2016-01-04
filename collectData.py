@@ -70,42 +70,23 @@ while True:
             createSoilRecords(piId, data)
         print data
 
-
-cur.execute("SELECT id, created_at, pi_id, watering, available FROM water")
-rows = cur.fetchall()
-for row in rows:
-    print "ID = ", row[0]
-    print "date = ", row[1]
-    print "pi_id = ", row[2]
-    print "watering = ", row[3]
-    print "present = ", row[4]
-
-cur.execute("SELECT id, created_at, pi_id, ir, lux, visible FROM light")
-rows = cur.fetchall()
-for row in rows:
-   print "ID = ", row[0]
-   print "date = ", row[1]
-   print "pi_id = ", row[2]
-   print "ir = ", row[3]
-   print "lux = ", row[4]
-   print "visible = ", row[5], "\n"
-
-cur.execute("SELECT id, created_at, pi_id, humidity FROM soil")
-rows = cur.fetchall()
-for row in rows:
-   print "ID = ", row[0]
-   print "date = ", row[1]
-   print "pi_id = ", row[2]
-   print "soil = ", row[3], "\n"
-
-cur.execute("SELECT id, created_at, pi_id, temp, humidity FROM air")
-rows = cur.fetchall()
-for row in rows:
-    print "ID = ", row[0]
-    print "date = ", row[1]
-    print "pi_id = ",
-    print "temp = ", row[3]
-    print "humidity = ", row[4], "\n"
+cur.execute("SELECT auto, humidity FROM schedule WHERE id = 1")
+row = cur.fetchone()
+if row[0] == True:
+    while True:
+        serial_line = ser.readline()
+        if serial_line.find(',') != -1:
+            data = serial_line.rstrip('\n').split(',')
+            print row[1]
+            a = int(data[5])
+            if (a/1000) < row[1]:
+                print 'watering'
+                print (a/1000)
+            else:
+                print (a/1000)
+                break
+        else:
+            break
 
 print "Operation done successfully"
 ser.close();
