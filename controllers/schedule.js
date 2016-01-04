@@ -84,7 +84,24 @@ app.get('/schedules/:id', function(req, res) {
 
 apiRouter.route('/schedules/:id')
 .post(function(req, res) {
-  console.log(req.body);
+  console.log(req.body[0].auto);
+  new Schedule({id: req.body[0].pi_id, pi_id: req.body[0].pi_id})
+    .save({
+      auto: req.body[0].auto,
+      humidity: req.body[0].humidity,
+      interval: req.body[0].interval,
+      monday: req.body[0].monday,
+      tuesday: req.body[0].tuesday,
+      wednesday: req.body[0].wednesday,
+      thursday: req.body[0].thursday,
+      friday: req.body[0].friday,
+      saturday: req.body[0].saturday,
+      sunday: req.body[0].sunday
+    },
+      {method: 'update'})
+    .then(function(data) {
+      console.log(data);
+    });
 });
 
 app.use('/server', apiRouter);

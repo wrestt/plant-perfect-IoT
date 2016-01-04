@@ -5,16 +5,17 @@ exports.up = function(knex, Promise) {
 
     table.boolean('auto');
     table.integer('humidity');
-    table.decimal('interval');
-    table.integer('monday');
-    table.integer('tuesday');
-    table.integer('wednesday');
-    table.integer('thursday');
-    table.integer('friday');
-    table.integer('saturday');
-    table.integer('sunday');
+    table.integer('interval');
+    table.boolean('monday');
+    table.boolean('tuesday');
+    table.boolean('wednesday');
+    table.boolean('thursday');
+    table.boolean('friday');
+    table.boolean('saturday');
+    table.boolean('sunday');
 
     table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.string('updated_at');
   });
 };
 
