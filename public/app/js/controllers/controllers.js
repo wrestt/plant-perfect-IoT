@@ -25,6 +25,7 @@
         };
 
         vm.setAutomation = function(data) {
+          PiData.postAutomation(data);
           console.log(data);
         };
       }
