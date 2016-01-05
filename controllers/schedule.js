@@ -101,6 +101,27 @@ apiRouter.route('/schedules/:id')
     });
 });
 
+
+apiRouter.route('/schedules/:id')
+.post(function(req, res) {
+  var scheduleData = req.body[0];
+  new Schedule({id: scheduleData.pi_id, pi_id: scheduleData.pi_id})
+    .save({
+      auto: scheduleData.auto,
+      humidity: scheduleData.humidity,
+      interval: scheduleData.interval,
+      monday: scheduleData.monday,
+      tuesday: scheduleData.tuesday,
+      wednesday: scheduleData.wednesday,
+      thursday: scheduleData.thursday,
+      friday: scheduleData.friday,
+      saturday: scheduleData.saturday,
+      sunday: scheduleData.sunday
+    }).then(function() {
+      timer(scheduleData.pi_id, scheduleData.interval);
+    });
+});
+
 apiRouter.route('/schedules/:id')
 .put(function(req, res) {
   var scheduleData = req.body[0];
@@ -119,26 +140,6 @@ apiRouter.route('/schedules/:id')
     },
       {method: 'update'}
     ).then(function() {
-      timer(scheduleData.pi_id, scheduleData.interval);
-    });
-});
-
-apiRouter.route('/schedules/:id')
-.post(function(req, res) {
-  var scheduleData = req.body[0];
-  new Schedule({id: scheduleData.pi_id, pi_id: scheduleData.pi_id})
-    .save({
-      auto: scheduleData.auto,
-      humidity: scheduleData.humidity,
-      interval: scheduleData.interval,
-      monday: scheduleData.monday,
-      tuesday: scheduleData.tuesday,
-      wednesday: scheduleData.wednesday,
-      thursday: scheduleData.thursday,
-      friday: scheduleData.friday,
-      saturday: scheduleData.saturday,
-      sunday: scheduleData.sunday
-    }).then(function() {
       timer(scheduleData.pi_id, scheduleData.interval);
     });
 });
