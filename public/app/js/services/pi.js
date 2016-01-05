@@ -32,14 +32,15 @@
         PiData.light.push(body.data[0].Light);
         PiData.soil.push(body.data[0].Soil);
         PiData.air.push(body.data[0].Air);
-        Pidata.schedule(body.data[0].Schedule);
+        scheduleJob(body.data[0].Schedule);
       }, function errCallback(response) {
         console.log('Error while fetching Pis');
       });
     };
 
-    PiData.schedule = function(obj) {
-      if (obj.length() < 1) {
+    function scheduleJob(obj) {
+      console.log('called schedule');
+      if (obj.length < 1) {
         PiData.postSchedule();
       } else {
         PiData.schedule.push(obj);
