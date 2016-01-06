@@ -1,6 +1,7 @@
 var Schedule = require('./../models/Schedule');
 var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
+var collectData = spawn('python', ['./../collectData.py']);
 var high = spawn('python', ['./../pumpStart.py']);
 var low = spawn('python', ['./../pumpStop.py']);
 var week = [
@@ -29,6 +30,22 @@ function start(id, interval) {
       stop();
     });
 };
+
+(function() {
+  var job = new CronJob('* 05 * * * *', function() {
+    console.log('stopped');
+    collectData.stdout.on('data', function(data) {
+      console.log('stdout: ' + data);
+    });
+
+    collectData.stderr.on('data', function(data) {
+      console.log('stderr: ' + data);
+    });
+  }, function() {
+      console.log(day + 'Job Canceled');
+    },
+  true, 'America/Los_Angeles');
+})();
 
 function stop() {
   console.log('stopped');
