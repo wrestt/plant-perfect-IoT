@@ -84,14 +84,14 @@ if row[0] == True:
             a = int(data[5])
             if a < row[1]:
                 print 'watering'
-                python pumpStart.py
+                python pumpStart
                 print a;
             else:
                 print a;
-                python pumpStop.py
+                python pumpStop
                 break
         else:
-            python pumpStop.py
+            python pumpStop
             break
 
 print "Operation done successfully"
