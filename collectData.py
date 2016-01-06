@@ -59,15 +59,15 @@ while True:
         data = serial_line.rstrip('\n').split(',')
         createPiRecords(piName);
         if data.__len__() > 6:
-            createWaterRecords(piId, data)
-            createLightRecords(piId, data)
-            createSoilRecords(piId, data)
-            createAirRecords(piId, data)
+            # createWaterRecords(piId, data)
+            # createLightRecords(piId, data)
+            # createSoilRecords(piId, data)
+            # createAirRecords(piId, data)
             break
         else:
-            createWaterRecords(piId, data)
-            # createLightRecords(piId, data)
-            createSoilRecords(piId, data)
+            # createWaterRecords(piId, data)
+            # # createLightRecords(piId, data)
+            # createSoilRecords(piId, data)
         print data
 
 cur.execute("SELECT auto, humidity FROM schedule WHERE id = 1")
