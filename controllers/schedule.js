@@ -1,7 +1,7 @@
 var Schedule = require('./../models/Schedule');
 var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
-var collectData = spawn('python', ['../collectData.py']);
+var collectData = spawn('python', ['./../collectData.py']);
 var week = [
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
 ];
