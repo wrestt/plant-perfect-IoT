@@ -66,7 +66,7 @@ while True:
             break
         else:
             createWaterRecords(piId, data)
-            createLightRecords(piId, data)
+            # createLightRecords(piId, data)
             createSoilRecords(piId, data)
         print data
 
