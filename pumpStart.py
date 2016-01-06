@@ -20,5 +20,3 @@ except KeyboardInterrupt:
     print "\n Stopped by Keyboard"
 except:
     print "Error occurred with setting GPIO pin to high"
-finally:
-    GPIO.cleanup()
