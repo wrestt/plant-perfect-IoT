@@ -4,7 +4,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(8, GPIO.OUT)
 
 try:
-    GPIO.output(pin, GPIO.high)
+    GPIO.output(8, GPIO.high)
     print "high"
 except KeyboardInterrupt:
     print "\n Stopped by Keyboard"
