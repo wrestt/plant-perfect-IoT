@@ -32,7 +32,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */2 * * * *', function() {
-    var collectData = spawn('python', ['../../collectData.py']);
+    var collectData = spawn('python', ['./collectData.py']);
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -47,7 +47,7 @@ function start(id, interval) {
 })();
 
 function stop() {
-  var low = spawn('python', ['./../pumpStop.py']);
+  var low = spawn('python', ['./pumpStop.py']);
   low.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
