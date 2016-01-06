@@ -31,8 +31,8 @@ function start(id, interval) {
 };
 
 (function() {
-  var job = new CronJob('0 */5 * * * *', function() {
-    var collectData = spawn('python', ['../collectData.py']);
+  var job = new CronJob('0 */2 * * * *', function() {
+    var collectData = spawn('python', ['../../collectData.py']);
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
