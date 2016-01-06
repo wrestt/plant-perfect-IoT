@@ -1,9 +1,6 @@
 var Schedule = require('./../models/Schedule');
 var CronJob = require('cron').CronJob;
 var spawn = require('child_process').spawn;
-var collectData = spawn('python', ['./../collectData.py']);
-var high = spawn('python', ['./../pumpStart.py']);
-var low = spawn('python', ['./../pumpStop.py']);
 var week = [
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
 ];
@@ -14,6 +11,7 @@ function start(id, interval) {
   .fetch()
     .then(function(arduino) {
       if (arduino.attributes.auto === false) {
+        var high = spawn('python', ['./../pumpStart.py']);
         high.stdout.on('data', function(data) {
           console.log('stdout: ' + data);
         });
@@ -33,7 +31,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */5 * * * *', function() {
-    console.log('stopped');
+    var collectData = spawn('python', ['../collectData.py']);
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -48,7 +46,7 @@ function start(id, interval) {
 })();
 
 function stop() {
-  console.log('stopped');
+  var low = spawn('python', ['./../pumpStop.py']);
   low.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
@@ -56,6 +54,7 @@ function stop() {
   low.stderr.on('data', function(data) {
     console.log('stderr: ' + data);
   });
+  console.log('stopped');
 };
 
 function timer(id, interval) {
