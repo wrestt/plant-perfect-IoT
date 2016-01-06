@@ -4,7 +4,7 @@ GPIO.setup(8, GPIO.OUT)
 
 try:
     GPIO.output(8, 0)
-    return "low"
+    print "low"
 except KeyboardInterrupt:
     print "\n Ending"
 except:
