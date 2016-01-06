@@ -31,16 +31,6 @@ function start(id, interval) {
     });
 };
 
-(function collectData() {
-    collectData.stdout.on('data', function(data) {
-      console.log('stdout: ' + data);
-    });
-
-    collectData.stderr.on('data', function(data) {
-      console.log('stderr: ' + data);
-    });
-
-})();
 
 function stop() {
   console.log('stopped');
@@ -157,3 +147,18 @@ apiRouter.route('/schedules/:id')
 });
 
 app.use('/server', apiRouter);
+
+
+function collectData() {
+  collectData.stdout.on('data', function(data) {
+    console.log('stdout: ' + data);
+  });
+
+  collectData.stderr.on('data', function(data) {
+    console.log('stderr: ' + data);
+  });
+
+  setTimeout(collectData, 300000);
+};
+
+setTimeout(collectData, 1000);
