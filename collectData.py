@@ -3,8 +3,6 @@ import serial
 import io
 import time
 import sys
-import pumpStart
-import pumpStop
 from local_variables import plantDataUsername, plantDataPassword
 USERNAME = plantDataUsername
 PASSWORD = plantDataPassword
@@ -91,10 +89,6 @@ if row[0] == True:
                 print 'Stopped'
                 execfile('pumpStop.py')
                 break
-        else:
-            execfile('pumpStop.py')
-            print 'Didnt go through loop'
-            break
 
 print 'Operation done successfully'
 ser.close();
