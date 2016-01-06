@@ -81,7 +81,7 @@ if soil[0] == True:
             print soil[1]
             print water[0]
             a = int(data[5])
-            if a < soil[1] && data[1] > 1.6:
+            if a < soil[1] and data[1] > 1.6:
                 print 'watering'
                 execfile('pumpStart.py')
                 print a;
