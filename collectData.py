@@ -72,6 +72,7 @@ while True:
 
 cur.execute("SELECT auto, humidity FROM schedule WHERE id = 1")
 row = cur.fetchone()
+print row;
 if row[0] == True:
     while True:
         serial_line = ser.readline()
@@ -79,11 +80,11 @@ if row[0] == True:
             data = serial_line.rstrip('\n').split(',')
             print row[1]
             a = int(data[5])
-            if (a/1000) < row[1]:
+            if a < row[1]:
                 print 'watering'
-                print (a/1000)
+                print a;
             else:
-                print (a/1000)
+                print a;
                 break
         else:
             break
