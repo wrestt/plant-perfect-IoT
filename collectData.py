@@ -3,6 +3,8 @@ import serial
 import io
 import time
 import sys
+import pumpStart
+import pumpStop
 from local_variables import plantDataUsername, plantDataPassword
 USERNAME = plantDataUsername
 PASSWORD = plantDataPassword
@@ -82,11 +84,14 @@ if row[0] == True:
             a = int(data[5])
             if a < row[1]:
                 print 'watering'
+                python pumpStart.py
                 print a;
             else:
                 print a;
+                python pumpStop.py
                 break
         else:
+            python pumpStop.py
             break
 
 print "Operation done successfully"
