@@ -71,16 +71,17 @@ while True:
         print data
 
 cur.execute("SELECT auto, humidity FROM schedule WHERE id = 1")
-row = cur.fetchone()
-print row;
-if row[0] == True:
+soil = cur.fetchone()
+print soil;
+if soil[0] == True:
     while True:
         serial_line = ser.readline()
         if serial_line.find(',') != -1:
             data = serial_line.rstrip('\n').split(',')
-            print row[1]
+            print soil[1]
+            print water[0]
             a = int(data[5])
-            if a < row[1]:
+            if a < soil[1] && data[1] > 1.6:
                 print 'watering'
                 execfile('pumpStart.py')
                 print a;

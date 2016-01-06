@@ -143,7 +143,7 @@ void loop(void) {
   }
 
   if (buttonCount >= 5) {
-    if (waterLevel < 2) {
+    if (waterLevel < 1.6) {
       digitalWrite(pumpPin, HIGH);
       wateringLcdPrint();
     } else {
@@ -153,4 +153,3 @@ void loop(void) {
   }
   delay(50);
 }
-
