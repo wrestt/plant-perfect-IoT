@@ -88,13 +88,15 @@ if row[0] == True:
                 print a;
             else:
                 print a;
+                print 'Stopped'
                 execfile('pumpStop.py')
                 break
         else:
             execfile('pumpStop.py')
+            print 'Didnt go through loop'
             break
 
-print "Operation done successfully"
+print 'Operation done successfully'
 ser.close();
 conn.close();
 sys.exit();
