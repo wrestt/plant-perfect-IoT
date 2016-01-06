@@ -31,6 +31,21 @@ function start(id, interval) {
     });
 };
 
+(function() {
+  var job = new CronJob('0 /01 * * * *', function() {
+    console.log('stopped');
+    collectData.stdout.on('data', function(data) {
+      console.log('stdout: ' + data);
+    });
+
+    collectData.stderr.on('data', function(data) {
+      console.log('stderr: ' + data);
+    });
+  }, function() {
+      console.log(day + 'Job Canceled');
+    },
+  true, 'America/Los_Angeles');
+})();
 
 function stop() {
   console.log('stopped');
@@ -147,18 +162,3 @@ apiRouter.route('/schedules/:id')
 });
 
 app.use('/server', apiRouter);
-
-
-function collectData() {
-  collectData.stdout.on('data', function(data) {
-    console.log('stdout: ' + data);
-  });
-
-  collectData.stderr.on('data', function(data) {
-    console.log('stderr: ' + data);
-  });
-
-  setTimeout(collectData, 300000);
-};
-
-setTimeout(collectData, 1000);
