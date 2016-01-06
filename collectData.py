@@ -79,7 +79,7 @@ if soil[0] == True:
         if serial_line.find(',') != -1:
             data = serial_line.rstrip('\n').split(',')
             print soil[1]
-            print water[0]
+            print data[1]
             a = int(data[5])
             if a < soil[1] and data[1] > 1.6:
                 print 'watering'
