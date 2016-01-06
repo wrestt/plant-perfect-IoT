@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('pi_id').references('pi.id');
 
     table.integer('watering');
-    table.integer('available');
+    table.decimal('available');
 
     table.timestamp('created_at').defaultTo(knex.fn.now());
   });
