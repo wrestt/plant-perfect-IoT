@@ -6,6 +6,7 @@ GPIO.setup(24, GPIO.OUT)           # set GPIO24 as an output
 
 try:
     GPIO.output(24, 0)
+    GPIO.cleanup()
     print "low"
 except KeyboardInterrupt:
     print "\n Ending"
