@@ -3,7 +3,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(8, GPIO.OUT)
 
 try:
-    GPIO.output(8, GPIO.low)
+    GPIO.output(8, 0)
     return "low"
 except KeyboardInterrupt:
     print "\n Ending"
