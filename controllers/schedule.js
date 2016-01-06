@@ -32,7 +32,7 @@ function start(id, interval) {
 };
 
 (function() {
-  var job = new CronJob('* 05 * * * *', function() {
+  var job = new CronJob('* 40 05 * * *', function() {
     console.log('stopped');
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
