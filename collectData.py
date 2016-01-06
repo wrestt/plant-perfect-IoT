@@ -7,7 +7,7 @@ from local_variables import plantDataUsername, plantDataPassword
 USERNAME = plantDataUsername
 PASSWORD = plantDataPassword
 
-ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
+ser = serial.Serial('/dev/ttyACM0', 9600)
 conn = psycopg2.connect(database="plantdata", user=USERNAME, password=PASSWORD, host="127.0.0.1", port="5432")
 cur = conn.cursor();
 
