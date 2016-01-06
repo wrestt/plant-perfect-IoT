@@ -6,7 +6,6 @@ GPIO.setup(24, GPIO.OUT)           # set GPIO24 as an output
 try:
     GPIO.output(24, 1)
     print "high"
-    GPIO.cleanup()
 except KeyboardInterrupt:
     print "\n Stopped by Keyboard"
 except:
