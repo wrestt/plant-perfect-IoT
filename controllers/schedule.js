@@ -31,9 +31,7 @@ function start(id, interval) {
     });
 };
 
-(function() {
-  var job = new CronJob('* 01 * * * *', function() {
-    console.log('stopped');
+(function collectData() {
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -41,10 +39,7 @@ function start(id, interval) {
     collectData.stderr.on('data', function(data) {
       console.log('stderr: ' + data);
     });
-  }, function() {
-      console.log(day + 'Job Canceled');
-    },
-  true, 'America/Los_Angeles');
+
 })();
 
 function stop() {
