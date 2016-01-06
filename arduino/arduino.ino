@@ -23,10 +23,12 @@ int buttonPin = 8;
 int pumpPin = 11;
 int count = 0;
 int soilHumidity;
+int waterSensorValue;
+float soilSensorValue;
 int button;
 int buttonCount;
-int waterPresent = true;
 int screenCount;
+float waterLevel;
 float fahrenheit;
 float humidity;
 uint32_t lum;
@@ -38,7 +40,7 @@ void configure(void) {
   lcd.begin(20, 4);
   lcd.createChar(0, newChar);
   tsl.setGain(TSL2591_GAIN_MED);
-  tsl.setTiming(TSL2591_INTEGRATIONTIME_400MS);
+  tsl.setTiming(TSL2591_INTEGRATIONTIME_100MS);
   pinMode(pumpPin, OUTPUT);
   pinMode(buttonPin, INPUT);
 }
@@ -46,16 +48,22 @@ void configure(void) {
 void basicLcdPrint(void) {
   lcd.setCursor (0,0);
   lcd.print("Lux: " + String(luxLight));
+    if(luxLight < 10000){lcd.print(" ");};
+    if(luxLight < 1000){lcd.print("  ");};
+    if(luxLight <  100){lcd.print("   ");};
+    if(luxLight <   10){lcd.print("   ");};
   lcd.setCursor(0, 1);
   lcd.print("Air Temp: " + String(fahrenheit));
   lcd.write(byte(0));
   lcd.print("F");
+    if(fahrenheit < 100){lcd.print("   ");};
   lcd.setCursor(0,2);
   lcd.print("Air Humidity: ");
   lcd.print(String(humidity) + "%");
   lcd.setCursor(0,3);
   lcd.print("Soil Humidity: ");
   lcd.print(String(soilHumidity) + "%");
+    if(soilHumidity <  100){lcd.print("  ");};
 }
 
 void backlightLcd(void) {
@@ -89,7 +97,7 @@ void setup(void) {
 }
 
 void basicRead(void) {
-  Serial.println(String(button) + ',' + String(waterPresent) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + '\n');
+  Serial.println(String(button) + ',' + String(waterLevel) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + '\n');
 }
 
 void advancedRead(void) {
@@ -100,12 +108,15 @@ void advancedRead(void) {
     return;
   } else  {
     basicLcdPrint();
-    Serial.print(String(button) + ','+ String(waterPresent) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + ',' + String(fahrenheit) + ',' + String(humidity) + '\n');
+    Serial.print(String(button) + ','+ String(waterLevel) + ',' + String(irLight) + ',' + String(luxLight) + ',' + String(visibleLight) + ',' + String(soilHumidity) + ',' + String(fahrenheit) + ',' + String(humidity) + '\n');
   }
 }
 
 void loop(void) {
-  soilHumidity = word(analogRead(A0));
+  waterSensorValue = analogRead(A0);
+  waterLevel = waterSensorValue * (3.3 / 1023.0);
+  soilSensorValue = analogRead(A1);
+  soilHumidity = ( soilSensorValue / 800 ) * 100;
   button = digitalRead(buttonPin);
   lum = tsl.getFullLuminosity();
   irLight = lum >> 16;
@@ -132,7 +143,7 @@ void loop(void) {
   }
 
   if (buttonCount >= 5) {
-    if (soilHumidity > 0) {
+    if (waterLevel < 2) {
       digitalWrite(pumpPin, HIGH);
       wateringLcdPrint();
     } else {
