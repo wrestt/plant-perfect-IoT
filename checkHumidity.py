@@ -25,7 +25,13 @@ if soil[0] == True:
                 print data[1]
                 print data[5]
                 a = int(data[5])
-                if a < soil[1] and float(data[1]) < 2:
+                try:
+                    float(value)
+                    return dataFloat = True
+                except ValueError:
+                    return dataFloat = False
+
+                if a < soil[1] and data == True and float(data[1]) < 2:
                     print 'watering'
                     execfile('pumpStart.py')
                     print a;
