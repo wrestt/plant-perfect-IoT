@@ -58,7 +58,7 @@ while True:
         piName = "WaterIoT"
         data = serial_line.rstrip('\n').split(',')
         createPiRecords(piName);
-        if data.__len__() > 6:
+        if data.__len__() > 7:
             createWaterRecords(piId, data)
             createLightRecords(piId, data)
             createSoilRecords(piId, data)
