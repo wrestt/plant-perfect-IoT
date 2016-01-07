@@ -21,8 +21,9 @@ if soil[0] == True:
             data = serial_line.rstrip('\n').split(',')
             print soil[1]
             print data[1]
+            print data[5]
             a = int(data[5])
-            if a < soil[1] and data[1] < 2:
+            if a < soil[1] and int(data[1]) < 2:
                 print 'watering'
                 execfile('pumpStart.py')
                 print a;
