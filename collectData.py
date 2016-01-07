@@ -64,10 +64,12 @@ while True:
             createSoilRecords(piId, data)
             createAirRecords(piId, data)
             break
-        else:
+        if data.__len__() > 2:
             createWaterRecords(piId, data)
             createLightRecords(piId, data)
             createSoilRecords(piId, data)
+        else:
+            print data
         print data
 
 print 'Operation done successfully'
