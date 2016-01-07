@@ -64,7 +64,7 @@ while True:
             createSoilRecords(piId, data)
             createAirRecords(piId, data)
             break
-        if data.__len__() > 4:
+        if data.__len__() > 5:
             createWaterRecords(piId, data)
             createLightRecords(piId, data)
             createSoilRecords(piId, data)
