@@ -59,37 +59,16 @@ while True:
         data = serial_line.rstrip('\n').split(',')
         createPiRecords(piName);
         if data.__len__() > 6:
-            # createWaterRecords(piId, data)
-            # createLightRecords(piId, data)
-            # createSoilRecords(piId, data)
-            # createAirRecords(piId, data)
+            createWaterRecords(piId, data)
+            createLightRecords(piId, data)
+            createSoilRecords(piId, data)
+            createAirRecords(piId, data)
             break
-        # else:
-        #     # createWaterRecords(piId, data)
-        #     # # createLightRecords(piId, data)
-        #     # createSoilRecords(piId, data)
+        else:
+            createWaterRecords(piId, data)
+            createLightRecords(piId, data)
+            createSoilRecords(piId, data)
         print data
-
-cur.execute("SELECT auto, humidity FROM schedule WHERE id = 1")
-soil = cur.fetchone()
-print soil;
-if soil[0] == True:
-    while True:
-        serial_line = ser.readline()
-        if serial_line.find(',') != -1:
-            data = serial_line.rstrip('\n').split(',')
-            print soil[1]
-            print data[1]
-            a = int(data[5])
-            if a < soil[1]:
-                print 'watering'
-                execfile('pumpStart.py')
-                print a;
-            else:
-                print a;
-                print 'Stopped'
-                execfile('pumpStop.py')
-                break
 
 print 'Operation done successfully'
 ser.close();
