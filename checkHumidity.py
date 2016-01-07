@@ -19,6 +19,7 @@ if soil[0] == True:
         serial_line = ser.readline()
         if serial_line.find(',') != -1:
             data = serial_line.rstrip('\n').split(',')
+            print len(data)
             print soil[1]
             print data[1]
             print data[5]
