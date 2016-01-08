@@ -134,7 +134,6 @@ apiRouter.route('/schedules/:id')
     });
 });
 
-
 apiRouter.route('/schedules/:id')
 .post(function(req, res) {
   var scheduleData = req.body[0];
