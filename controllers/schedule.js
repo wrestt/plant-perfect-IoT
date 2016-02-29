@@ -53,7 +53,7 @@ function start(id, interval) {
       console.log('stdout: ' + data);
     });
 
-    CheckHumidity.stderr.on('data', function(data) {
+    checkHumidity.stderr.on('data', function(data) {
       console.log('stderr: ' + data);
     });
   }, function() {
