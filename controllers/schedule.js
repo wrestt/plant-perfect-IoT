@@ -37,7 +37,7 @@ function start(id, interval) {
       console.log('stdout: ' + data);
     });
 
-    CollectData.stderr.on('data', function(data) {
+    collectData.stderr.on('data', function(data) {
       console.log('stderr: ' + data);
     });
   }, function() {
