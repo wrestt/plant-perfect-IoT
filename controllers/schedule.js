@@ -182,15 +182,15 @@ apiRouter.route('/schedules/:id/pump')
     switch (pumpStatus) {
       case true:
         console.log('starting pump');
-            Var stopPump = spawn('python', ['./pumpStart.py']);
-            collectData.stdout.on('data', function(data) {
+        var stopPump = spawn('python', ['./pumpStart.py']);
+        collectData.stdout.on('data', function(data) {
               console.log('stdout: ' + data);
             });
         break;
       default:
         console.log('stopping pump');
-          Var stopPump = spawn('python', ['./pumpStop.py']);
-          collectData.stdout.on('data', function(data) {
+        var stopPump = spawn('python', ['./pumpStop.py']);
+        collectData.stdout.on('data', function(data) {
             console.log('stdout: ' + data);
           });
     }
