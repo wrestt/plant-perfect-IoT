@@ -12,7 +12,7 @@ function start(id, interval) {
   .fetch()
     .then(function(arduino) {
       if (arduino.attributes.auto === false) {
-        var high = spawn('python', ['./../pumpStart.py']);
+        var high = spawn('python', ['./pumpStart.py']);
         high.stdout.on('data', function(data) {
           console.log('stdout: ' + data);
         });
@@ -32,7 +32,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */1 * * * *', function() {
-    var collectData = spawn('python', ['./../collectData.py']);
+    var collectData = spawn('python', ['./collectData.py']);
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -48,7 +48,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */1 * * * *', function() {
-    var checkHumidity = spawn('python', ['./../checkHumidity.py']);
+    var checkHumidity = spawn('python', ['./checkHumidity.py']);
     checkHumidity.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -181,18 +181,26 @@ apiRouter.route('/schedules/:id/pump')
     var pumpStatus = req.body.status;
     switch (pumpStatus) {
       case true:
-        console.log('starting pump');
-        var stopPump = spawn('python', ['./../pumpStart.py']);
-        collectData.stdout.on('data', function(data) {
-              console.log('stdout: ' + data);
-            });
+        var high = spawn('python', ['./pumpStart.py']);
+        high.stdout.on('data', function(data) {
+          console.log('stdout: ' + data);
+        });
+
+        high.stderr.on('data', function(data) {
+          console.log('stderr: ' + data);
+        });
         break;
       default:
-        console.log('stopping pump');
-        var stopPump = spawn('python', ['./../pumpStop.py']);
-        collectData.stdout.on('data', function(data) {
-            console.log('stdout: ' + data);
-          });
+        var low = spawn('python', ['./pumpStop.py']);
+        low.stdout.on('data', function(data) {
+          console.log('stdout: ' + data);
+        });
+
+        low.stderr.on('data', function(data) {
+          console.log('stderr: ' + data);
+        });
+        console.log('stopped');
+        break;
     }
     res.send(pumpStatus)
   });
