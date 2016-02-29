@@ -20,10 +20,6 @@ if soil[0] == True:
         if serial_line.find(',') != -1:
             data = serial_line.rstrip('\n').split(',')
             if len(data) == 6:
-                print len(data)
-                print soil[1]
-                print data[1]
-                print data[5]
                 a = int(data[5])
                 def isfloat(value):
                     try:

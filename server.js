@@ -7,13 +7,13 @@ var _ = require('lodash');
 apiRouter = express.Router();
 app = express();
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/app'));
-app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/bower_components'));
 
 require('./controllers/index');
 

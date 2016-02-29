@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default"  ng-init="vm.fetchPis()">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/"><img src="/images/logo.png" alt="Plant Perfect Logo"/></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <nav class='hidden-xs' uib-collapse="isCollapsed" uib-dropdown-menu>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/">Home</a></li>
+        <li><a href="https://github.com/wrestt/plant-perfect-IoT">About</a></li>
+        <li class="dropdown" uib-dropdown>
+          <a href="#" tid="btn-append-to-single-button"   uib-dropdown-toggle>Plants <span class="caret"></a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button" ng-repeat="pi in vm.pis track by $index">
+            <li role="menuitem"><a href="" ng-click='vm.plantPage(pi[0])'>{{pi[0].name}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <nav  uib-collapse="!isCollapsed" style="height: 0px;" uib-dropdown-menu>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li class="dropdown" uib-dropdown>
+          <a href="#" tid="btn-append-to-single-button"   uib-dropdown-toggle>Plants <span class="caret"></a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button" ng-repeat="pi in vm.pis track by $index">
+            <li role="menuitem"><a href="#" ng-click="vm.fetchPi(pi[0])">{{pi[0].name}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div><!-- /.container-fluid -->
+</nav>

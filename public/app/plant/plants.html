@@ -1,0 +1,234 @@
+<div class="container" ng-init="vm.fetchPlantData()">
+  <div class="row">
+    <div class="page-header">
+      <h1>
+        {{vm.pi[0]}}
+        <small>
+          <div class="btn-group">
+            <button class="btn btn-default btn-xs" ng-model="vm.pump" ng-change="vm.pumpStatus(vm.pump)" uib-btn-radio="true" uib-uncheckable="uncheckable">On</button>
+            <button class="btn btn-default btn-xs" ng-model="vm.pump" ng-change="vm.pumpStatus(vm.pump)" uib-btn-radio="false" uib-uncheckable="uncheckable">Off</button>
+          </div>
+        </small>
+      </h1>
+    </div>
+  </div>
+  <div class="row" ng-if="vm.pi[0]">
+    <div class="col-xs-12 col-sm-12 col-md-12 center-block">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <uib-tabset active="activeJustified" justified="true">
+            <uib-tab index="0" heading="Dashboard">
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-sm-4 col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Soil</h3>
+                    </div>
+                    <div class="panel-body">
+                      <p>Humidity: {{vm.soilSets[0][0].humidity}}% </p><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Air</h3>
+                    </div>
+                    <div class="panel-body">
+                      <p>Temperature (F): {{vm.airSets[0][0].temp}} </p><br>
+                      <p>Humidity: {{vm.airSets[0][0].humidity}}%</p><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Light</h3>
+                    </div>
+                    <div class="panel-body">
+                      <p>Lux: {{vm.lightSets[0][0].lux}}</p><br>
+                      <p>ir: {{vm.lightSets[0][0].ir}}</p><br>
+                      <p>Visible: {{vm.lightSets[0][0].visible}}</p><br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </uib-tab>
+            <uib-tab index="1" heading="Schedule">
+              <div class="row">
+
+                <div class="col-xs-8 col-sm-6 col-md-4 center-block">
+                  <br>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <p>Schedule</p>
+                    </div>
+                    <div class="panel-body">
+                      <label>Automatic Watering :
+                      </label>
+                      <div class="btn-group">
+                        <button class="btn btn-default btn-xs" ng-model="vm.scheduleSet[0].auto" uib-btn-radio="true" uib-uncheckable="uncheckable">On</button>
+                        <button class="btn btn-default btn-xs" ng-model="vm.scheduleSet[0].auto" uib-btn-radio="false" uib-uncheckable="uncheckable">Off</button>
+                      </div>
+                    </br>
+                  </br>
+                  <form action="#" class="left-align" ng-hide="vm.scheduleSet[0].auto == true">
+                    <input id="monday" ng-model="vm.scheduleSet[0].monday" type="checkbox" aria-label="monday"/>
+                    <label for="monday">Monday</label>
+                    <br>
+                    <input id="tuesday" ng-model="vm.scheduleSet[0].tuesday" type="checkbox" aria-label="tuesday">
+                    <label for="tuesday">Tuesday</label>
+                    <br>
+                    <input id="wednesday" ng-model="vm.scheduleSet[0].wednesday" type="checkbox" aria-label="wednesday">
+                    <label for="wednesday">Wednesday</label>
+                    <br>
+                    <input id="thursday" ng-model="vm.scheduleSet[0].thursday" type="checkbox" aria-label="thursday">
+                    <label for="thursday">Thursday</label>
+                    <br>
+                    <input id="friday" ng-model="vm.scheduleSet[0].friday" type="checkbox" aria-label="friday">
+                    <label for="friday">Friday</label>
+                    <br>
+                    <input id="saturday" ng-model="vm.scheduleSet[0].saturday" type="checkbox" aria-label="saturday">
+                    <label for="saturday">Saturday</label>
+                    <br>
+                    <input id="sunday" ng-model="vm.scheduleSet[0].sunday" type="checkbox" aria-label="sunday">
+                    <label for="sunday">Sunday</label>
+                    <br>
+                    <label for="run-time" class="col-sm-2 control-label">Interval (min)</label>
+                    <div class="col-sm-4">
+                      <input class="form-control" type="number" id="run-time" ng-model="vm.scheduleSet[0].interval">
+                    </div>
+                    <br>
+                    <br>
+                    <hr>
+                    <button class="waves-effect waves-light btn" name="button" ng-click="vm.setSchedule(vm.scheduleSet)" type="button">Submit Schedule</button>
+                  </form>
+                  <form action="#" ng-show="vm.scheduleSet[0].auto == true">
+                    <p ng-if="vm.scheduleSet">
+                      {{vm.scheduleSet[0].humidity}}%
+                    </p>
+                    <p class="range-field">
+                      <input id="test5" max="100" min="0" ng-model="vm.scheduleSet[0].humidity" type="range"/>
+                    </p>
+                    <button class="waves-effect waves-light btn" name="automation" ng-click="vm.setAutomation(vm.scheduleSet)" type="button">Set</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Soil">
+          <!--  charts-->
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <p>Soil Data</p>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th data-field="number">Date</th>
+                      <th data-field="number">Humidity</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="set in vm.soilSets[0] | orderBy: '-created_at'" ng-click=(vm.logData(set))>
+                      <td>{{set.created_at}}</td>
+                      <td>{{set.humidity}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <canvas id="line" class="chart chart-bar" chart-data="vm.dataSoil" chart-labels="vm.labelsSoil" chart-legend="true" chart-series="vm.seriesSoil"></canvas>
+          </div>
+        </uib-tab>
+        <uib-tab index="3" heading="Light">
+
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <p>Light Data</p>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th data-field="number">Date</th>
+                      <th data-field="number">Lux</th>
+                      <th data-field="number">IR</th>
+                      <th data-field="number">Visible</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="set in vm.lightSets[0] | orderBy: '-created_at'" ng-click=(vm.logData(set))>
+                      <td>{{set.created_at}}</td>
+                      <td>{{set.lux}}</td>
+                      <td>{{set.ir}}</td>
+                      <td>{{set.visible}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <canvas id="line" class="chart chart-line" chart-data="vm.dataLight" chart-labels="vm.labelsLight" chart-legend="true" chart-series="vm.seriesLight"></canvas>
+          </div>
+
+        </uib-tab>
+        <uib-tab index="4" heading="Air">
+
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <p>Light Data</p>
+              </div>
+              <div class="panel-body">
+
+                <table class="table table-hover table-responsive">
+                  <thead>
+                    <tr>
+                      <th data-field="number">Date</th>
+                      <th data-field="number">Temperature (F)</th>
+                      <th data-field="number">Humidity</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr ng-repeat="set in vm.airSets[0] | orderBy: '-created_at'" ng-click=(vm.logData(set))>
+                      <td>{{set.created_at}}</td>
+                      <td>{{set.temp}}</td>
+                      <td>{{set.humidity}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 center-block">
+            <canvas id="line" class="chart chart-line" chart-data="vm.dataAir" chart-labels="vm.labelsAir" chart-legend="true" chart-series="vm.seriesAir"></canvas>
+          </div>
+
+        </uib-tab>
+      </uib-tabset>
+
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
