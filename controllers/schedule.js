@@ -30,37 +30,37 @@ function start(id, interval) {
     });
 };
 
-// (function() {
-//   var job = new CronJob('0 */1 * * * *', function() {
-//     var collectData = spawn('python', ['./collectData.py']);
-//     collectData.stdout.on('data', function(data) {
-//       console.log('stdout: ' + data);
-//     });
-//
-//     CollectData.stderr.on('data', function(data) {
-//       console.log('stderr: ' + data);
-//     });
-//   }, function() {
-//       console.log(day + 'Job Canceled');
-//     },
-//   true, 'America/Los_Angeles');
-// })();
+(function() {
+  var job = new CronJob('0 */1 * * * *', function() {
+    var collectData = spawn('python', ['./collectData.py']);
+    collectData.stdout.on('data', function(data) {
+      console.log('stdout: ' + data);
+    });
 
-// (function() {
-//   var job = new CronJob('0 */1 * * * *', function() {
-//     var checkHumidity = spawn('python', ['./checkHumidity.py']);
-//     checkHumidity.stdout.on('data', function(data) {
-//       console.log('stdout: ' + data);
-//     });
-//
-//     CheckHumidity.stderr.on('data', function(data) {
-//       console.log('stderr: ' + data);
-//     });
-//   }, function() {
-//       console.log(day + 'Job Canceled');
-//     },
-//   true, 'America/Los_Angeles');
-// })();
+    CollectData.stderr.on('data', function(data) {
+      console.log('stderr: ' + data);
+    });
+  }, function() {
+      console.log(day + 'Job Canceled');
+    },
+  true, 'America/Los_Angeles');
+})();
+
+(function() {
+  var job = new CronJob('0 */1 * * * *', function() {
+    var checkHumidity = spawn('python', ['./checkHumidity.py']);
+    checkHumidity.stdout.on('data', function(data) {
+      console.log('stdout: ' + data);
+    });
+
+    CheckHumidity.stderr.on('data', function(data) {
+      console.log('stderr: ' + data);
+    });
+  }, function() {
+      console.log(day + 'Job Canceled');
+    },
+  true, 'America/Los_Angeles');
+})();
 
 function stop() {
   var low = spawn('python', ['./pumpStop.py']);
