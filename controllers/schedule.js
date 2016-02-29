@@ -32,7 +32,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */1 * * * *', function() {
-    var collectData = spawn('python', ['./collectData.py']);
+    var collectData = spawn('python', ['./../collectData.py']);
     collectData.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -48,7 +48,7 @@ function start(id, interval) {
 
 (function() {
   var job = new CronJob('0 */1 * * * *', function() {
-    var checkHumidity = spawn('python', ['./checkHumidity.py']);
+    var checkHumidity = spawn('python', ['./../checkHumidity.py']);
     checkHumidity.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
     });
@@ -182,14 +182,14 @@ apiRouter.route('/schedules/:id/pump')
     switch (pumpStatus) {
       case true:
         console.log('starting pump');
-        var stopPump = spawn('python', ['./pumpStart.py']);
+        var stopPump = spawn('python', ['./../pumpStart.py']);
         collectData.stdout.on('data', function(data) {
               console.log('stdout: ' + data);
             });
         break;
       default:
         console.log('stopping pump');
-        var stopPump = spawn('python', ['./pumpStop.py']);
+        var stopPump = spawn('python', ['./../pumpStop.py']);
         collectData.stdout.on('data', function(data) {
             console.log('stdout: ' + data);
           });
